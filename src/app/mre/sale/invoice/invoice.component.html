@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="images/favicon.png" rel="icon" />
+  <title>Invoice - MRE</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900"
+    type="text/css" />
+</head>
+
+<body>
+  <!-- Container -->
+
+
+  <div class="container-fluid" style="width: 70%">
+    <br /><br />
+
+    <!-- Main Content -->
+    <main>
+      <div class="card">
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <div class="card-content">
+              <div class="card-body">
+
+                <div class="row d-flex mt-4">
+
+                  <div class="col-md-6">
+                    <table class="table table-borderless">
+                      <tbody>
+                        <tr>
+                          <span>
+                            <strong class="text-muted mr-2 ">Date:</strong>
+                            {{payment.created_at|date:'MMM d,y'}}
+                          </span>
+                        </tr>
+                        <tr>
+                          <span>
+                            <strong class="text-muted mt-1 mr-2">Invoice No:</strong>
+                            {{ payment.id }}
+                          </span>
+                        </tr>
+                        <tr>
+                          <span>
+                            <strong class="text-muted mt-1 mr-2">Invoice To:</strong>
+                            {{ payment.cname }}
+                          </span>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="col-sm-6 text-center">
+                      <h4 class="text-7 ">Invoice</h4>
+                      <span class="mt-4">
+                        <img id="logo" src="assets/img/logo.png" width="100" />
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <hr>
+                <ng-container>
+                  <ngx-datatable #table class="bootstrap core-bootstrap" [rows]="rows" [columnMode]="ColumnMode.force"
+                    [headerHeight]="50" [footerHeight]="50" rowHeight="auto" [limit]="10">
+                    <ngx-datatable-column [name]="'ID' | translate" prop="id" [width]="50">
+                      <ng-template ngx-datatable-cell-template let-value="value">
+                        {{ value }}
+                      </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column [name]="'Product'" prop="product_name"></ngx-datatable-column>
+                    <ngx-datatable-column [name]="'Quantity'" prop="qty"></ngx-datatable-column>
+                    <ngx-datatable-column [name]="'Unit Price'" prop="sell_price"></ngx-datatable-column>
+                    <ngx-datatable-column [name]="'Amount'" prop="desc">
+                      <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{row.qty * row.sell_price | number:'0.2'}}
+                      </ng-template>
+                    </ngx-datatable-column>
+                  </ngx-datatable>
+                </ng-container>
+                <hr />
+                <div class="row">
+                  <div class="col-md-4">
+                    <strong>Total:</strong>{{totalPayment|number:'0.2'}}<span class="ml-2"></span>
+                  </div>
+                  <div class="col-md-4">
+                    <strong>Paid:</strong><span class="ml-2">{{payment.paid|number:'0.2'}}</span>
+                  </div>
+                  <div class="col-md-4">
+                    <strong>Debt:</strong><span class="ml-2">{{payment.debt|number:'0.2'}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- Footer -->
+    <footer class="text-center mt-4">
+      <p class="text-1">
+        <strong>NOTE :</strong> This is computer generated receipt and does
+        not require physical signature.
+      </p>
+      <div class="btn-group btn-group-sm d-print-none">
+        <a href="javascript:window.print()" class="btn btn-light border text-black-50 shadow-none"><i
+            class="fa fa-print"></i> Print</a>
+      </div>
+    </footer>
+  </div>
+</body>
+
+</html>

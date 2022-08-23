@@ -1,0 +1,239 @@
+<div class="row">
+	<div class="col-6 mt-2">
+		<h4 class="primary text-uppercase">{{'PACKAGE_DETAILS'|translate}}</h4>
+	</div>
+
+	<div class="col-6">
+		<button class="btn btn-defaul pull-right" (click)="goToDocumentList()" style="border: 1px solid #c9c7c7;">
+			<i class="ft ft-list cursor-pointer"></i>
+			{{'PACKAGE_LIST'|translate}}
+		</button>
+	</div>
+</div>
+<div class="card" style="padding: 20px;">
+	<div class="card-content">
+		<div class="card-body">
+			<div class="row">
+				<div class="col-12">
+					<div style="margin-top: 10px;">
+						<div class="row">
+
+							<div class="col-3 col-sm-12 col-md-3 ">
+								<table class="table table-borderless table-sm ">
+									<tbody style="justify-content: right;">
+
+										<tr valign="middle"
+											style="border-bottom: 1px solid rgb(214, 214, 214); margin-top: 10px;">
+											<th>{{'CODE' | translate }}</th>
+											<td>{{document?.code }}</td>
+										</tr>
+
+										<tr valign="middle"
+											style="border-bottom: 1px solid rgb(214, 214, 214); margin-top: 10px;">
+											<th>{{'SUB_CODE' | translate }}</th>
+											<td>{{document?.sub_code}}</td>
+										</tr>
+
+										<tr valign="middle"
+											style="border-bottom: 1px solid rgb(214, 214, 214); margin-top: 10px;">
+											<th>{{'TYPE' | translate }}</th>
+											<td>{{document?.type }}</td>
+										</tr>
+
+										<tr valign="middle"
+											style="border-bottom: 1px solid rgb(214, 214, 214); margin-top: 10px;">
+											<th>{{'VALIDITY' | translate }}</th>
+											<td>{{document?.validity}}</td>
+										</tr>
+
+										<tr valign="middle"
+											style="border-bottom: 1px solid rgb(214, 214, 214); margin-top: 10px;">
+											<th>{{'AMOUNT' | translate }}</th>
+											<td>{{document?.amount}}</td>
+										</tr>
+										<tr valign="middle"
+											style="border-bottom: 1px solid rgb(214, 214, 214); margin-top: 10px;">
+											<th>{{'AMOUNT_VALUE' | translate }}:</th>
+											<td>{{document?.amount_value}}</td>
+										</tr>
+										<tr valign="middle"
+											style="border-bottom: 1px solid rgb(214, 214, 214); margin-top: 10px;">
+											<th>{{'ACTIVE' | translate }}</th>
+											<td class="description badge badge-pill bg-light-success"
+												*ngIf="document?.active">{{ 'YES' | translate }}</td>
+											<td class="description badge badge-pill bg-light-danger"
+												*ngIf="!document?.active">{{ 'NO' | translate }}</td>
+										</tr>
+
+										<tr valign="middle"
+											style="border-bottom: 1px solid rgb(214, 214, 214); margin-top: 10px;">
+											<th>{{'AUTO_RENEWAL' | translate }}</th>
+											<td class="description badge badge-pill bg-light-success"
+												*ngIf="document?.auto_renewal">{{ 'YES' | translate }}</td>
+											<td class="description badge badge-pill bg-light-danger"
+												*ngIf="!document?.auto_renewal">{{ 'NO' | translate }}</td>
+										</tr>
+										<tr valign="middle"
+											style="border-bottom: 1px solid rgb(214, 214, 214); margin-top: 10px;">
+											<th>{{'IS_LIST' | translate }}</th>
+											<td class="description badge badge-pill bg-light-success"
+												*ngIf="document?.isList">{{ 'YES' | translate }}</td>
+											<td class="description badge badge-pill bg-light-danger"
+												*ngIf="!document?.isList">{{ 'NO' | translate }}</td>
+										</tr>
+										<tr valign="middle"
+											style="border-bottom: 1px solid rgb(214, 214, 214); margin-top: 10px;">
+											<th>{{'CREATION_DATE' | translate }}</th>
+											<td>{{document?.created_at.substring(0,10) }}</td>
+										</tr>
+
+										<tr valign="middle"
+											style="border-bottom: 1px solid rgb(214, 214, 214); margin-top: 10px;">
+											<th>{{'NAME_EN' | translate }}</th>
+											<td>{{document?.name_en }}</td>
+										</tr>
+										<tr valign="middle"
+											style="border-bottom: 1px solid rgb(214, 214, 214); margin-top: 10px;">
+											<th>{{'NAME_FA' | translate }}</th>
+											<td>{{document?.name_fa }}</td>
+										</tr>
+										<tr valign="middle"
+											style="border-bottom: 1px solid rgb(214, 214, 214); margin-top: 10px;">
+											<th>{{'NAME_PS' | translate }}</th>
+											<td>{{document?.name_ps }}</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+
+							<div class="col-8 col-md-8" style="display: flex; justify-content: center; flex-direction: row;">
+
+								<div class="col-4">
+
+									<img [src]="'/api/pic/'+document?.p_pic"
+										alt="nil" width="350">
+								</div>
+								<div class="col-4">
+									<img [src]="'/api/pic/'+document?.l_pic"
+										alt="nil" height="350" >
+								</div>
+							</div>
+
+							<div class="col-1 col-md-1">
+								<button type="button" class="btn btn-icon btn-lg round pull-right"
+									[title]="'EDIT_DOCUMENT' | translate" (click)="editDocument()">
+									<i class="ft-edit text-primary cursor-pointer"></i>
+								</button>
+
+								<button type="button" class="btn btn-icon btn-lg round pull-right" 
+									(click)="approveDocument()" [title]="'APPROVE_PACKAGE' | translate">
+									<i class="ft ft-check text-success cursor-pointer"></i>
+								</button>
+							</div>
+
+							<div class="col-12 col-sm-12 col-md-12">
+								<table class="table table-borderless table-sm " style="table-layout: auto; width: 80%;">
+									<tbody >
+										<tr valign="start">
+											<th>{{'DESCRIPTION' | translate }}:</th>
+										</tr>
+										<tr>
+											<td>
+												{{document.details_en}}
+											</td>
+											<td>
+												{{document.details_fa}}
+											</td>
+											<td>
+												{{document.details_ps}}
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row" style="margin-top: 30px; margin-bottom: 10px;">
+				<div class="col-10">
+					<h5 class="primary text-uppercase">{{'CHILD_LIST'|translate}}</h5>
+
+				</div>
+				<div class="col-2">
+					<button type="button" class="btn btn-icon btn-lg round pull-right"
+						[title]="'CREATE_CHILD' | translate" (click)="addChild()">
+						<i class="ft-plus text-primary cursor-pointer"></i>
+					</button>
+				</div>
+			</div>
+
+			<div id="invoice-items-details">
+				<div class="row">
+					<div class="table-responsive col-12">
+						<table class="table mt-3">
+							<thead>
+								<tr>
+									<th>{{ 'ID' | translate }} </th>
+									<th>{{'CODE' | translate}} </th>
+									<th>{{'TYPE' | translate}}</th>
+									<th>{{'VALIDITY' | translate}}</th>
+									<th>{{'PRICE' | translate}}</th>
+									<th>{{'AMOUNT' | translate}}</th>
+									<th class="text-right">{{ 'ACTIONS' | translate }}</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr *ngFor="let row of comments;">
+									<td>
+										<p>{{row.id}}</p>
+									</td>
+
+									<td>
+										<p>{{row.code}}</p>
+									</td>
+									<td>
+										<p>
+											{{row.type }}
+										</p>
+									</td>
+									<td>
+										<p>
+											{{row.validity }}
+										</p>
+									</td>
+									<td>
+										<p>
+											{{row.price }}
+										</p>
+									</td>
+									<td>
+										<p>
+											{{row.amount }}
+										</p>
+									</td>
+									<td class="text-right">
+
+										<button class="btn btn-icon round" [title]="'DELETE_CHILD' | translate"
+											(click)="deleteChild(row.id)">
+											<i class="ft-trash text-danger cursor-pointer"></i>
+										</button>
+										<button type="button" [title]="'EDIT_CHILD' | translate"
+											class="btn btn-icon round" (click)="editChild(row.id)">
+											<i class="ft-edit text-primary cursor-pointer"></i>
+										</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<ngx-spinner class="loader" bdOpacity=0.3 bdColor="#f4f4f9" size="large" color="#b416f7" type="ball-spin-clockwise-fade"
+	[fullScreen]="true">
+</ngx-spinner>

@@ -1,0 +1,50 @@
+
+
+
+<div class="modal-header">
+    <h4 class="modal-title">Update sell product</h4>
+    <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row pl-4  pr-4" >
+      <form [formGroup]="newForm" >
+        <div class="row">
+              <div class="col-12 col-sm-12">
+                <div class="form-group">
+                  <label for="title">Price<span
+                      class="required-field">*</span></label>
+                  <div class="controls">
+                    <input type="text" formControlName="sell_price" class="form-control"
+                      [ngClass]="{ 'error-border': newForm.get('sell_price').hasError('required') && (newForm.get('sell_price').touched) }">
+                  </div>
+                  <div *ngIf="newForm.get('sell_price').hasError('required') && (newForm.get('sell_price').touched)"
+                    class="text-danger"> <i class="ft-alert-circle align-middle"></i>
+                    Price {{'IS_REQUIRED'|translate}}
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-12">
+                <div class="form-group">
+                  <label for="title">Quantity<span
+                      class="required-field">*</span></label>
+                  <div class="controls">
+                    <input type="text" formControlName="qty" class="form-control"
+                      [ngClass]="{ 'error-border': newForm.get('qty').hasError('required') && (newForm.get('qty').touched) }">
+                  </div>
+                  <div *ngIf="newForm.get('qty').hasError('required') && (newForm.get('qty').touched)"
+                    class="text-danger"> <i class="ft-alert-circle align-middle"></i>
+                    Quantity {{'IS_REQUIRED'|translate}}
+                  </div>
+                </div>
+              </div>          
+          </div>
+      </form>
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary btn-fill mr-2" (click)="onFormSubmit()">Update</button>
+          <button class="btn btn-outline-danger btn-fill" (click)="closeModal()" type="button">Close</button>
+        </div>
+    </div>
+  

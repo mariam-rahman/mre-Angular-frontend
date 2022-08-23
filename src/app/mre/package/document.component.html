@@ -1,0 +1,130 @@
+<section id="ngx-datatables-server-side">
+	<div class="row">
+		<div class="col-12 mt-2">
+			<h4>{{'Main- Stock_Management'|translate}}</h4>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-12">
+			<div class="card">
+				<div class="card-header">
+					<div class="row">
+						<div class="col-12">
+							<div class="users-list-filter px-2">
+								<form autocomplete="off" [formGroup]="filterForm" (submit)="applyFilter()">
+									<div class="row mb-2 mx-n2">
+										<div class="col-12 col-sm-6 col-lg-3">
+											<label for="users-list-verified">{{'PACKAGE_CODE'|translate}}</label>
+											<fieldset class="form-group">
+												<input type="text" class="form-control" formControlName="code" />
+											</fieldset>
+										</div>
+										<div class="col-12 col-sm-6 col-lg-2 d-flex align-items-center">
+											<button type="submit" class="btn btn-primary btn-block users-list-clear">
+												{{'SEARCH'|translate}}
+											</button>&nbsp;
+											<button type="reset" (click)="resetFilters()"
+												class="btn btn-warning btn-block users-list-clear"
+												style="margin-top:initial">
+												{{'CLEAR'|translate}}
+											</button>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+						<!-- Filter ends -->
+					</div>
+					<hr>
+					<button type="button" class="btn btn-outline-info btn-icon round mr-1 mb-1 pull-right"
+						(click)="reload()">
+						<i class="ft ft-refresh-cw"></i>
+					</button>
+					<button type="button" class="btn btn-outline-info btn-icon round mr-1 mb-1 pull-right"
+						title="Add Document" [disabled]="loading" (click)="addNewRecord()">
+						<i class="ft ft-plus"></i>
+					</button>
+
+					<div class="col-md-3 col-3">
+						<div class="form-group">
+							<select #pageLength (change)='setPageLength(pageLength.value)' class="form-control">
+								<option *ngFor="let pl of pageLengths" [selected]="pl.id==10" [value]="pl.id">
+									{{ pl.count }} {{ 'RECORDS' | translate }}
+								</option>
+								<!-- <option value="-1">{{ 'ALL' | translate }}</option> -->
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="card-content">
+					<div class="card-body">
+						<ng-container *ngIf="tableOptions">
+							<!-- ngx-datatables-server-side -->
+							<ngx-datatable #table class="bootstrap core-bootstrap" [rows]="rows" [columns]="columns"
+								[virtualization]="false" [columnMode]="ColumnMode.force" [headerHeight]="50"
+								[footerHeight]="50" rowHeight="auto" [limit]="tableOptions.length"
+								[loadingIndicator]="dataLoadingFlag" [scrollbarH]="true" (page)="setPage($event)"
+								[reorderable]="reorderable" [swapColumns]="swapColumns" [externalPaging]="true"
+								[externalSorting]="true" [count]="recordsTotal" [offset]="tableOptions.draw"
+								[sorts]="[{prop: 'id', dir: 'desc'}]" (sort)="onSort($event)">
+								<ngx-datatable-column name="{{'ID'|translate}}" prop="id" [width]="50">
+								</ngx-datatable-column>
+								<ngx-datatable-column name="{{'CODE'|translate}}" prop="code" [width]="80">
+								</ngx-datatable-column>
+								<ngx-datatable-column name="{{'SUB_CODE'|translate}}" prop="sub_code" [width]="80">
+								</ngx-datatable-column>
+								<ngx-datatable-column name="{{'TYPE'|translate}}" prop="type" [width]="80">
+								</ngx-datatable-column>
+								<ngx-datatable-column name="{{'VALIDITY'|translate}}" prop="validity" [width]="80">
+								</ngx-datatable-column>
+								<ngx-datatable-column name="{{'PRICE'|translate}}" prop="price" [width]="80">
+								</ngx-datatable-column>
+								<ngx-datatable-column name="{{'AMOUNT'|translate}}" prop="amount" [width]="80">
+								</ngx-datatable-column>
+								<!-- <ngx-datatable-column name="{{'DESCRIPTION'|translate}}" prop="BODY" [width]="100">
+								</ngx-datatable-column> -->
+								<ngx-datatable-column name="{{'STATUS'|translate}}" [width]="80" [sortable]="true">
+									<ng-template let-row="row" ngx-datatable-cell-template>
+										<div class="badge badge-pill"
+											[ngClass]="{'bg-light-success':row.active == 1, 'bg-light-danger':row.active == 0 }">
+											{{ row.active==1 ? 'Active':'Inactive' }}
+										</div>
+									</ng-template>
+								</ngx-datatable-column>
+
+								<ngx-datatable-column name="{{'ACTIONS'|translate}}" [width]="100" [sortable]="false">
+									<ng-template let-row="row" ngx-datatable-cell-template>
+										<!-- <button type="button" class="btn btn-icon round" *ngIf="row.APPROVED"
+											[title]="'DEPARTMENT_LIST' | translate"
+											(click)="documentDepartmentList(row.ID)">
+											<i class="ft ft-list text-primary cursor-pointer"></i>
+										</button> -->
+										<button type="button" class="btn btn-icon round"
+											[title]="'PACKAGE_DETAILS' | translate"
+											(click)="viewDocumentDetails(row.id)">
+											<i class="ft ft-eye text-primary cursor-pointer"></i>
+										</button>
+										<button type="button" class="btn btn-icon round"
+											[title]="'DELETE_PACKAGE' | translate" (click)="deleteDocument(row.id)">
+											<i class="ft ft-trash text-danger cursor-pointer"></i>
+										</button>
+										<!-- <button type="button" class="btn  btn-icon round mr-1 mb-1"
+											(click)="viewFile(row.ID)" title="{{'VIEW_ATTACHMENT' | translate}}"
+                                            *ngIf="globals.principal.hasAuthority(['TAQNIN_DOCUMENT_MODULE','DOCUMENT_ATTACHMENT_VIEW'])">
+											<i class="ft ft-paperclip text-secondary"></i>
+										</button> -->
+										
+									</ng-template>
+								</ngx-datatable-column>
+							</ngx-datatable>
+							<!--/ ngx-datatables-server-side -->
+						</ng-container>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<ngx-spinner class="loader" bdOpacity=0.3 bdColor="#f4f4f9" size="large" color="#b416f7" type="ball-spin-clockwise-fade"
+	[fullScreen]="true">
+</ngx-spinner>

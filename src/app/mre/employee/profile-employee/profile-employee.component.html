@@ -1,0 +1,203 @@
+
+
+
+<section class="users-view">
+    <!-- Media object starts -->
+    <div class="row">
+        <div class="col-10 mx-auto  d-flex justify-content-end align-items-center">
+                    
+            <a  a class="btn btn-outline-info round mr-2" routerLink="/../employees">Back</a>
+          </div>
+    </div>
+    <!-- Media object ends -->
+  
+    <div class="row">
+      <div class="col-md-10 mx-auto"> 
+        <!-- Card data starts -->
+        <div class="card">
+          <div class="card-content">
+            <div class="card-body">
+                <div class="row">
+                    <div class="ml-4">
+                      <div class="media d-flex align-items-center">
+                          <img [src]="'http://127.0.0.1:8000/storage/'+empDetails.image" alt="Employee Image"
+                            class="users-avatar-shadow rounded" height="100" width="100">      
+                        <div class="media-body ml-3">
+                          <h4>
+                            <span class="users-view-name mr-1">{{empDetails.name}}</span>
+                          </h4>
+                          <span class="mr-1">ID:</span>
+                          <span class="users-view-id">{{empDetails.id}}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+              <div class="row">
+                <div class="col-12 col-xl-4">
+                  <table class="table table-borderless">
+                    <tbody>
+                      <tr>
+                        <td>Email:</td>
+                        <td>{{empDetails.email}}</td>
+                      </tr>
+                      <tr>
+                        <td>Contact no:</td>
+                        <td class="users-view-latest-activity">{{empDetails.phone}}</td>
+                      </tr>
+                      <tr>
+                        <td>Designation:</td>
+                        <td class="users-view-verified">{{rows[0]?.designation}}</td>
+                      </tr>
+                      <tr>
+                        <td>Salary:</td>
+                        <td class="users-view-role">{{rows[0]?.salary}}</td>
+                      </tr>
+                      <tr>
+                        <td>Address:</td>
+                        <td>{{empDetails.address}}</td>
+                      </tr>
+                    </tbody>
+                </table>
+                </div>
+
+                <hr>
+                <div class="col-12 col-xl-8 users-module">
+                  <div class="table-responsive">
+                    <table class="table mb-0">
+                      <thead>
+                        <tr>
+                          <th>Joining Date</th>
+                          <th>Contract Date</th>
+                          <th>Contarct Update</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>{{empDetails.joining_date}}
+                           
+                          </td>
+                          <td>{{empDetails.created_at|date:'MMM d,y'}}  
+                          </td>
+                          <td>{{empDetails.updated_at|date:'MMM d,y'}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Card data ends -->
+      </div>
+
+      <div class="col-10 mx-auto">
+        <!-- User detail starts -->
+        <div class="card">
+          <div class="card-content">
+            <div class="card-body">
+
+              <div class="row bg-primary bg-lighten-4 rounded mb-3 mx-1 text-center text-lg-left">             
+                <div class="col-12 p-3 d-flex justify-content-center">
+                  <h5 class="primary align-self-center mb-0 mx-1">Employee Promotion</h5> 
+                </div>             
+              </div>
+  
+
+              <div class="row ">
+                <div class="col-xl-12 col-md-4 col-sm-10 mx-auto">
+                <!--Table   of Angular-->
+                 <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <button type="button" class="btn btn-outline-info btn-icon round mr-1 mb-1 pull-right" (click)="refresh()"
+                                title="Refresh"  [class.fa-spin]="loading" >
+                                  <i class="ft ft-refresh-cw"></i>
+                              </button>
+
+                                <button type="button" class="btn btn-outline-info btn-icon round mr-1 mb-1 pull-right" (click)="addPromotion()"
+                                 title="Promote"><i class="ft ft-plus"></i>
+                                 </button>
+                            </div>
+                            <div class="card-content">
+                                    <ng-container >
+                                        <ngx-datatable #table class="bootstrap core-bootstrap table-striped table-bordered"   [rows]="rows"
+                                            [columnMode]="ColumnMode.force" [headerHeight]="50" [footerHeight]="50" rowHeight="auto"
+                                            [limit]="10" >
+                                            <ngx-datatable-column [name]="'Id'" prop="id" [width]="50">
+                                                <ng-template ngx-datatable-cell-template let-value="value">
+                                                    {{ value }}
+                                                  </ng-template>
+                                            </ngx-datatable-column>
+                                            <ngx-datatable-column [name]="'Salary'" prop="salary"></ngx-datatable-column>
+                                            <ngx-datatable-column [name]="'Designation'" prop="designation"></ngx-datatable-column>
+                                            <ngx-datatable-column [name]="'Date'" prop="created_at">
+                                            <ng-template let-row='row' ngx-datatable-cell-template>
+                                                {{row.created_at|date:'MMM d, y'}}
+                                            </ng-template>
+                                        </ngx-datatable-column>
+                                            <ngx-datatable-column [name]="'Action' | translate" [width]="100">
+                                                <ng-template ngx-datatable-cell-template let-row="row" let-rowIndex="row_index">
+                                                    <ngx-spinner
+                                                    bdColor="rgba(255, 255, 255, 0.100)"
+                                                    size="medium"
+                                                    color="black"
+                                                    type="ball-scale-multiple"
+                                                    fullScreen="false">
+                                                    </ngx-spinner>
+            
+                                                        <!-- <button type="button" class="btn btn-icon  round" (click)="deleteRecord(row.id)" title="Delete Category"
+                                                        >
+                                                        <i class="ft-trash text-danger cursor-pointer"></i>
+                                                        </button> -->
+            
+                                                        <button type="button" class="btn btn-icon text-primary round" (click)="editPromotion(row.id)" title="Edit Promotion"
+                                                        >
+                                                            <i class="ft-edit text-primary cursor-pointer"></i>
+                                                        </button>
+            
+                                                </ng-template>
+                                            </ngx-datatable-column>
+                                        </ngx-datatable>
+                                    </ng-container>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+            <!-- End Angular-->
+                        </div>
+                    </div>          
+            </div>
+          </div>
+        </div>
+        <!-- User detail ends -->
+      </div>
+    </div>
+  </section>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

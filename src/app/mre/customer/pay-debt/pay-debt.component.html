@@ -1,0 +1,104 @@
+<section id="ngx-datatables-server-side">
+    <div class="row text-left">
+        <div class="col-12">
+            <div class="content-header">
+               Debt Form
+                <button type="button" class="btn btn-outline-info btn-icon round mr-1 mb-1 pull-right" (click)="refresh()"
+                  title="Refresh"  [class.fa-spin]="loading" >
+                    <i class="ft ft-refresh-cw"></i>
+                </button>
+                <a  a class="btn btn-outline-info round mr-2 mb-1 pull-right" routerLink="/../customers">Back</a>
+               
+            </div>
+        </div>
+    </div>
+  
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="form-row">
+                        <div class="col-md-4 col-12 ml-auto">
+                            <div class="input-group">
+                                <input type="text" #searchBar class="form-control">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="button" (click)="searchTerm(searchBar.value)">
+                                        <i class="ft ft-search"></i>
+                                    </button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+
+
+                        <div class="row d-flex mt-4">
+                            <div class="col-6">
+                                <ul>
+                                <li class=" d-flex">
+                                    <h4 class="text-primary">Total Paid:</h4>
+                                    <div class="card-title ml-2">{{totalPaid}}</div>
+                                </li>
+                                <li class="d-flex mb-2">
+                                        <h4 class="text-primary">Total Debt:</h4>
+                                        <div class="card-title ml-2">{{totalDebt}}</div>
+                                    </li>
+                                </ul>
+                    
+                            </div>
+                            <div class="col-6 d-flex" style="justify-content: right">
+                                <ul>
+                                     
+                                <button type="button" class="btn btn-outline-success px-5 pt-2 pb-1" (click)="pay()"><div class="font-weight-bold" ><h3 class="text-center">Pay</h3></div></button> 
+                                </ul>
+                            </div>
+                        </div>
+                        <hr>
+
+
+                        <ng-container >
+                            <ngx-datatable #table class="bootstrap core-bootstrap" [rows]="rows"
+                                [columnMode]="ColumnMode.force" [headerHeight]="50" [footerHeight]="50" rowHeight="auto"
+                                [limit]="10" >
+                                <ngx-datatable-column [name]="'ID' | translate" prop="id" [width]="50">
+                                    <ng-template ngx-datatable-cell-template let-value="value">
+                                        {{ value }}
+                                      </ng-template>
+                                </ngx-datatable-column>
+                                <!-- <ngx-datatable-column [name]="'Payment'" >
+                                    <ng-template ngx-datatable-cell-template let-pay="row" >
+                                      {{(pay.debt|number : '1.0-0')+ (pay.paid|number : '1.0-0')}}
+                                    </ng-template>
+                                </ngx-datatable-column> -->
+                                <ngx-datatable-column [name]="'Paid'" prop="paid"></ngx-datatable-column>
+                                <ngx-datatable-column [name]="'Debt'" prop="debt"></ngx-datatable-column>
+                                <ngx-datatable-column [name]="'ACTIONS' | translate" [width]="100">
+                                    <ng-template ngx-datatable-cell-template let-row="row" let-rowIndex="row_index">
+                                        <ngx-spinner
+                                        bdColor="rgba(255, 255, 255, 0.100)"
+                                        size="medium"
+                                        color="black"
+                                        type="ball-scale-multiple"
+                                        fullScreen="false">
+                                        </ngx-spinner>
+
+                                            <button  title="Dept Details" type="button" class="btn btn-icon text-primary round" routerLink="/customers/debtDetails/{{row.sale_id}}">
+                                                <i class="ft-eye text-primary cursor-pointer"></i>
+                                                </button>
+
+                                    </ng-template>
+                                </ngx-datatable-column>
+                            </ngx-datatable>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+  

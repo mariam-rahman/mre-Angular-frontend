@@ -1,0 +1,138 @@
+
+<div class="modal-header">
+    <h4 class="modal-title">{{formType==true?"Add Home Info":"Edit Home Info"}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row pl-4  pr-4" >
+      <form [formGroup]="newForm" enctype="multipart/form-data">
+        <div class="row">
+              <div class="col-12 col-sm-12">
+                <div class="form-group">
+                  <label for="category_title">Category Title<span
+                      class="required-field">*</span></label>
+                  <div class="controls">
+                    <input type="text" formControlName="category_title"  class="form-control"
+                      [ngClass]="{ 'error-border': newForm.get('category_title').hasError('required') && (newForm.get('category_title').touched) }">
+                  </div>
+                  <div *ngIf="newForm.get('category_title').hasError('required') && (newForm.get('category_title').touched)"
+                    class="text-danger"> <i class="ft-alert-circle align-middle"></i>
+                    Category Title is required
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-12">
+                <div class="form-group">
+                  <label for="category_description">Category Description<span
+                      class="required-field">*</span></label>
+                  <div class="controls">
+                    <input type="text" formControlName="category_description"  class="form-control"
+                      [ngClass]="{ 'error-border': newForm.get('category_description').hasError('required') && (newForm.get('category_description').touched) }">
+                  </div>
+                  <div *ngIf="newForm.get('category_description').hasError('required') && (newForm.get('category_description').touched)"
+                    class="text-danger"> <i class="ft-alert-circle align-middle"></i>
+                    Category Description is required
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-12">
+                <div class="form-group">
+                  <label for="product_title">Product Title<span
+                      class="required-field">*</span></label>
+                  <div class="controls">
+                    <input type="text" formControlName="product_title"  class="form-control"
+                      [ngClass]="{ 'error-border': newForm.get('product_title').hasError('required') && (newForm.get('product_title').touched) }">
+                  </div>
+                  <div *ngIf="newForm.get('product_title').hasError('required') && (newForm.get('product_title').touched)"
+                    class="text-danger"> <i class="ft-alert-circle align-middle"></i>
+                    Product Title is required
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-12">
+                <div class="form-group">
+                  <label for="product_description">Product Description<span
+                      class="required-field">*</span></label>
+                  <div class="controls">
+                    <input type="text" formControlName="product_description"  class="form-control"
+                      [ngClass]="{ 'error-border': newForm.get('product_description').hasError('required') && (newForm.get('product_description').touched) }">
+                  </div>
+                  <div *ngIf="newForm.get('product_description').hasError('required') && (newForm.get('product_description').touched)"
+                    class="text-danger"> <i class="ft-alert-circle align-middle"></i>
+                    Product Description is required
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-12">
+                <div class="form-group">
+                  <label for="address">Address<span
+                      class="required-field">*</span></label>
+                  <div class="controls">
+                    <input type="text" formControlName="address"  class="form-control"
+                      [ngClass]="{ 'error-border': newForm.get('address').hasError('required') && (newForm.get('address').touched) }">
+                  </div>
+                  <div *ngIf="newForm.get('address').hasError('required') && (newForm.get('address').touched)"
+                    class="text-danger"> <i class="ft-alert-circle align-middle"></i>
+                    Product Description is required
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-12">
+                <div class="form-group">
+                  <label for="phone1">Phone1<span
+                      class="required-field">*</span></label>
+                  <div class="controls">
+                      <input type="text" class="form-control" formControlName="phone1" cols="30" rows="10"
+                      [ngClass]="{ 'error-border': newForm.get('phone1').hasError('required') && (newForm.get('phone1').touched) }"
+                      >
+                  </div>
+                  <div *ngIf="newForm.get('phone1').hasError('required') && (newForm.get('phone1').touched)"
+                    class="text-danger"> <i class="ft-alert-circle align-middle"></i>
+                    Phone1 {{'IS_REQUIRED'|translate}}
+                  </div>
+            
+                </div>
+              </div>
+              <div class="col-12 col-sm-12">
+                <div class="form-group">
+                  <label for="phone2">Phone2<span
+                      class="required-field">*</span></label>
+                  <div class="controls">
+                      <input type="text" class="form-control" formControlName="phone2" cols="30" rows="10"
+                      [ngClass]="{ 'error-border': newForm.get('phone1').hasError('required') && (newForm.get('phone2').touched) }"
+                      >
+                  </div>
+                  <div *ngIf="newForm.get('phone2').hasError('required') && (newForm.get('phone2').touched)"
+                    class="text-danger"> <i class="ft-alert-circle align-middle"></i>
+                    Phone2 {{'IS_REQUIRED'|translate}}
+                  </div>           
+                </div>
+              </div>
+              <div class="col-12 col-sm-12">
+                <div class="form-group">
+                  <label for="email">Email<span
+                      class="required-field">*</span></label>
+                  <div class="controls">
+                      <input type="text" class="form-control" formControlName="email" cols="30" rows="10"
+                      [ngClass]="{ 'error-border': newForm.get('email').hasError('required') && (newForm.get('email').touched) }"
+                      >
+                  </div>
+                  <div *ngIf="newForm.get('email').hasError('required') && (newForm.get('email').touched)"
+                    class="text-danger"> <i class="ft-alert-circle align-middle"></i>
+                    Email {{'IS_REQUIRED'|translate}}
+                  </div>           
+                </div>
+              </div>
+
+          </div>
+      </form>
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary btn-fill mr-2" (click)="onFormSubmit()">{{formType==true?"Submit":"Update"}}</button>
+          <button class="btn btn-outline-danger btn-fill" (click)="closeModal()" type="button">Close</button>
+        </div>
+    </div>
+    <ngx-spinner class="loader" bdOpacity=0.3 bdColor="#f4f4f9" size="large" color="#b416f7" type="ball-spin-clockwise-fade"
+    [fullScreen]="true">
+  </ngx-spinner>

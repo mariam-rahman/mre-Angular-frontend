@@ -1,0 +1,83 @@
+
+<section id="ngx-datatables-server-side">
+    <div class="row text-left">
+        <div class="col-12">
+            <div class="content-header">
+               Employee Salary Details
+                <button type="button" class="btn btn-outline-info btn-icon round mr-1 mb-1 pull-right" (click)="refresh()"
+                  title="Refresh"  [class.fa-spin]="loading" >
+                    <i class="ft ft-refresh-cw"></i>
+                </button>
+                <button type="button" class="btn btn-outline-info btn-icon round mr-1 mb-1 pull-right" (click)="paySalary()"
+                title="Pay Salary">
+                    <i class="ft ft-plus"></i>
+                </button>
+               
+                   
+                                
+                        <a  a class="btn btn-outline-info round mr-2 mb-1 pull-right" routerLink="/../employees">Back</a>
+                    
+             
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="form-row">
+                        <div class="col-md-4 col-12 ml-auto">
+                            <div class="input-group">
+                                <input type="text" #searchBar class="form-control">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="button" (click)="searchTerm(searchBar.value)">
+                                        <i class="ft ft-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row ">
+                    <div class="col-md-4">
+                        <span class="text-primary ml-3 mr-3">Designation:</span>{{emp.designation}}
+                        <hr>
+                    </div>
+                    <div class="col-md-4">
+                        <span class="text-primary mr-3">ID:</span>{{emp.employee_id}}
+                        <hr>
+                    </div>
+                    <div class="col-md-4">
+                        <span class="text-primary mr-3">Salary:</span>{{rows[0]?.salary}}
+                        <hr>
+                    </div>
+                </div>
+
+
+                <div class="card-content">
+                    <div class="card-body">
+                        <ng-container >
+                            <ngx-datatable #table class="bootstrap core-bootstrap" [rows]="rows"
+                                [columnMode]="ColumnMode.force" [headerHeight]="50" [footerHeight]="50" rowHeight="auto"
+                                [limit]="10" >
+                                <ngx-datatable-column [name]="'ID' | translate" prop="id" [width]="50">
+                                    <ng-template ngx-datatable-cell-template let-value="value">
+                                        {{ value }}
+                                      </ng-template>
+                                </ngx-datatable-column>
+                                <ngx-datatable-column [name]="'Payment'" prop="salary" [width]="50"></ngx-datatable-column>
+                                <ngx-datatable-column name="Date"  [width]="80">
+									<ng-template let-row="row" ngx-datatable-cell-template>
+										{{row.created_at|date:'MMM d,y'}}
+									</ng-template>
+								</ngx-datatable-column>
+                            </ngx-datatable>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

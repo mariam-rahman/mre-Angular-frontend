@@ -1,0 +1,79 @@
+<!-- 
+
+<div class="modal-header">
+    <h4 class="modal-title">Move back Product</h4>
+    <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row pl-4  pr-4" >
+      <form [formGroup]="newForm" enctype="multipart/form-data">
+          <div class="row">
+              <div class="col-md-12" style="width: 450px;">
+                <div class="form-group">
+                  <label for="move_qty">Quantity to move<span
+                      class="required-field">*</span></label>
+                    <input type="number" min="1" formControlName="move_qty" class="form-control"
+                      [ngClass]="{ 'error-border': newForm.get('move_qty').hasError('required') && (newForm.get('move_qty').touched) }">    
+                  <div *ngIf="newForm.get('move_qty').hasError('required') && (newForm.get('move_qty').touched)"
+                    class="text-danger"> <i class="ft-alert-circle align-middle"></i>
+                    Quantity {{'IS_REQUIRED'|translate}}
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-12" style="width: 450px;">
+                <div class="form-group">
+                  <label for="move_qty">Discount<span
+                      class="required-field">*</span></label>
+                    <input type="number" min="1" formControlName="discount" class="form-control"
+                      [ngClass]="{ 'error-border': newForm.get('discount').hasError('required') && (newForm.get('discount').touched) }">    
+                  <div *ngIf="newForm.get('discount').hasError('required') && (newForm.get('discount').touched)"
+                    class="text-danger"> <i class="ft-alert-circle align-middle"></i>
+                    Discount {{'IS_REQUIRED'|translate}}
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-12">
+                <div class="form-group">
+                  <label for="category">product<span
+                      class="required-field">*</span></label>
+                  <div class="controls">
+                    <select #category (change)='setCategory(category.value)' class="form-control">
+                      <option>Select product</option>
+                      <option *ngFor="let c of categories"  [value]="c.id">
+                        {{ c.title}}
+                      </option>
+                    </select>
+                    <span *ngIf="cerror" class="text-danger"><i class="ft-alert-circle align-middle"></i>product is required</span>
+                  </div>
+ 
+                </div>
+              </div>
+
+              <div class="col-md-12" style="width: 450px;">
+                <div class="form-group">
+                  <label for="move_qty">Sell Price per-item<span
+                      class="required-field">*</span></label>
+                    <input type="number" min="1" formControlName="sell_price" class="form-control"
+                      [ngClass]="{ 'error-border': newForm.get('sell_price').hasError('required') && (newForm.get('sell_price').touched) }">    
+                  <div *ngIf="newForm.get('sell_price').hasError('required') && (newForm.get('sell_price').touched)"
+                    class="text-danger"> <i class="ft-alert-circle align-middle"></i>
+                    Price {{'IS_REQUIRED'|translate}}
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          
+      </form>
+        <div class="col-12">
+          <button class="btn btn-secondary btn-fill" (click)="closeModal()" type="button">Close</button>
+          <button type="submit" class="btn btn-warning btn-fill ml-2" (click)="onFormSubmit()">Move</button>
+        </div>
+    </div>
+    <ngx-spinner class="loader" bdOpacity=0.3 bdColor="#f4f4f9" size="large" color="#b416f7" type="ball-spin-clockwise-fade"
+    [fullScreen]="true">
+  </ngx-spinner> -->

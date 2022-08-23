@@ -1,0 +1,77 @@
+
+<div class="modal-header">
+    <h4 class="modal-title">{{id != 0?'Add  Expenese':'Update Expenese'}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.close()">
+      x
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row pl-4  pr-4" >
+      <form [formGroup]="newForm">
+        <div class="row">
+              <div class="col-12 col-sm-12">
+                <div class="form-group">
+                  <label for="amount">Amount<span
+                      class="required-field">*</span></label>
+                  <div class="controls">
+                    <input type="text" formControlName="amount" class="form-control"
+                      [ngClass]="{ 'error-border': newForm.get('amount').hasError('required') && (newForm.get('amount').touched) }">
+                  </div>
+                  <div *ngIf="newForm.get('amount').hasError('required') && (newForm.get('amount').touched)"
+                    class="text-danger"> <i class="ft-alert-circle align-middle"></i>
+                    Amount is required
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-12">
+                <div class="form-group">
+                  <label for="event">Event<span
+                      class="required-field">*</span></label>
+                  <div class="controls">
+                    <input type="text" formControlName="event" class="form-control"
+                      [ngClass]="{ 'error-border': newForm.get('event').hasError('required') && (newForm.get('event').touched) }">
+                  </div>
+                  <div *ngIf="newForm.get('event').hasError('required') && (newForm.get('event').touched)"
+                    class="text-danger"> <i class="ft-alert-circle align-middle"></i>
+                    Event is required
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-12">
+                <div class="form-group">
+                  <label for="date">Date<span
+                      class="required-field">*</span></label>
+                  <div class="controls">
+                    <input type="date" formControlName="date" class="form-control"
+                      [ngClass]="{ 'error-border': newForm.get('date').hasError('required') && (newForm.get('date').touched) }">
+                  </div>
+                  <div *ngIf="newForm.get('date').hasError('required') && (newForm.get('date').touched)"
+                    class="text-danger"> <i class="ft-alert-circle align-middle"></i>
+                   Date {{'IS_REQUIRED'|translate}}
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-12">
+                <div class="form-group">
+                  <label for="description">Description<span
+                      class="required-field">*</span></label>
+                  <div class="controls">
+                      <textarea class="form-control" formControlName="description" cols="30" rows="5"
+                      [ngClass]="{ 'error-border': newForm.get('description').hasError('required') && (newForm.get('description').touched) }"
+                      >
+                    </textarea>
+                  </div>
+                  <div *ngIf="newForm.get('description').hasError('required') && (newForm.get('description').touched)"
+                    class="text-danger"> <i class="ft-alert-circle align-middle"></i>
+                    Description is required
+                  </div>
+                </div>
+              </div>
+          </div>
+      </form>
+        <div class="col-12" style="text-align: right;">
+          <button class="btn btn-primary btn-save" (click)="onFormSubmit()">
+            {{ id != 0 ? 'Create' : 'Update'}}
+          </button>
+        </div>
+    </div>

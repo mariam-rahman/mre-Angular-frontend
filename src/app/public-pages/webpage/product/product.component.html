@@ -1,0 +1,124 @@
+<app-header></app-header>
+    <!-- Start Content -->
+    <div class="container py-5">
+      <div class="row">
+
+          <div class="col-lg-3">
+              <h1 class="h2 pb-4">Categories</h1>
+              <ul class="list-unstyled templatemo-accordion">
+                  <li class="pb-3" *ngFor="let c of categories">
+                      <a (click)="categoryFilter(c.id)" class="collapsed d-flex justify-content-between h3 text-decoration-none">
+                          {{c.cat_name}}
+                          <i class="fa fa-fw fa-chevron-circle-down mt-1"></i>
+                      </a>
+                  </li>            
+              </ul>
+          </div>
+
+          <div class="col-lg-9">
+              <div class="row">
+                  
+                  <div class="col-md-12 pb-4">
+                     <h3 class="d-flex justify-content-center">Products with Details</h3>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-md-4" *ngFor="let product of products">
+                      <div class="card mb-4 product-wap rounded-0">
+                          <div class="card rounded-0">
+                              <img class="card-img rounded-0 img-fluid" [src]="'http://127.0.0.1:8000/storage/'+product.image">
+                              <div class="card-img-overlay rounded-0 product-overlay d-flex align-items-center justify-content-center">
+                                  <ul class="list-unstyled">
+                                      <li><a class="btn btn-success text-white" href="shop-single.html"><i class="far fa-heart"></i></a></li>
+                                      <li><a class="btn btn-success text-white mt-2" href="shop-single.html"><i class="far fa-eye"></i></a></li>
+                                      <li><a class="btn btn-success text-white mt-2" href="shop-single.html"><i class="fas fa-cart-plus"></i></a></li>
+                                  </ul>
+                              </div>
+                          </div>
+                          <div class="card-body">
+                              <a href="shop-single.html" class="h3 text-decoration-none">{{product.name}}</a>
+                              <ul class="w-100 list-unstyled d-flex justify-content-between mb-0">
+                                  <li>M/L/X/XL</li>
+                                  <li class="pt-2">
+                                      <span class="product-color-dot color-dot-red float-left rounded-circle ml-1"></span>
+                                      <span class="product-color-dot color-dot-blue float-left rounded-circle ml-1"></span>
+                                      <span class="product-color-dot color-dot-black float-left rounded-circle ml-1"></span>
+                                      <span class="product-color-dot color-dot-light float-left rounded-circle ml-1"></span>
+                                      <span class="product-color-dot color-dot-green float-left rounded-circle ml-1"></span>
+                                  </li>
+                              </ul>
+                              <ul class="list-unstyled d-flex justify-content-center mb-1">
+                                  <li>
+                                      <i class="text-warning fa fa-star"></i>
+                                      <i class="text-warning fa fa-star"></i>
+                                      <i class="text-warning fa fa-star"></i>
+                                      <i class="text-muted fa fa-star"></i>
+                                      <i class="text-muted fa fa-star"></i>
+                                  </li>
+                              </ul>
+                              <p class="text-center mb-0">$250.00</p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+     
+              <!--Pagination-->
+              <div div="row">
+                  <ul class="pagination pagination-lg justify-content-end">
+                      <li class="page-item disabled">
+                          <a class="page-link active rounded-0 mr-3 shadow-sm border-top-0 border-left-0" href="#" tabindex="-1">1</a>
+                      </li>
+                      <li class="page-item">
+                          <a class="page-link rounded-0 mr-3 shadow-sm border-top-0 border-left-0 text-dark" href="#">2</a>
+                      </li>
+                      <li class="page-item">
+                          <a class="page-link rounded-0 shadow-sm border-top-0 border-left-0 text-dark" href="#">3</a>
+                      </li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="container">
+    <h3 class="text-center mt-5 mb-5">Angular Basic Pagination Example</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Title</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="
+            let post of POSTS
+              | paginate
+                : {
+                    itemsPerPage: tableSize,
+                    currentPage: page,
+                    totalItems: count
+                  };
+            let i = index
+          "
+        >
+          <th scope="row">{{ post.id }}</th>
+          <td>{{ post.title }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="d-flex justify-content-center">
+      <pagination-controls
+        previousLabel="Prev"
+        nextLabel="Next"
+        (pageChange)="onTableDataChange($event)"
+      >
+      </pagination-controls>
+    </div>
+  </div>
+  <!-- End Content -->
+<ngx-spinner class="loader" bdOpacity=0.3 bdColor="#f4f4f9" size="large" color="#2F8BE6" type="ball-spin-clockwise-fade"
+	[fullScreen]="true">
+</ngx-spinner>
+  <!-- Start Footer -->
+<web-footer></web-footer>
+<!-- End Footer -->

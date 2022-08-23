@@ -1,0 +1,92 @@
+
+<div class="modal-header">
+    <h4 class="modal-title">Edit Customer</h4>
+    <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row pl-4  pr-4" >
+      <form [formGroup]="newForm" enctype="multipart/form-data">
+        <div class="row">
+              <div class="col-12 col-sm-12">
+                <div class="form-group">
+                  <label for="name">Name<span
+                      class="required-field">*</span></label>
+                  <div class="controls">
+                    <input type="text" formControlName="name"  required pattern="^[a-zA-Z]{3,20}\s?([a-zA-Z]{3,20})?$" class="form-control"
+                      [ngClass]="{ 'error-border': newForm.get('name').hasError('required') && (newForm.get('name').touched) }">
+                  </div>
+                  <div *ngIf="newForm.get('name').hasError('required') && (newForm.get('name').touched)"
+                    class="text-danger"> <i class="ft-alert-circle align-middle"></i>
+                    Name {{'IS_REQUIRED'|translate}}
+                  </div>
+                  <small class="col-12 text-danger pl-0" 
+                  *ngIf="newForm.get('name').hasError('pattern') && (newForm.get('name').touched)">
+                  Name must be between 3-20 charachters!
+              </small>
+                </div>
+              </div>
+              <div class="col-12 col-sm-12">
+                <div class="form-group">
+                  <label for="email">email<span
+                      class="required-field">*</span></label>
+                  <div class="controls">
+                    <input type="text" formControlName="email" required pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9]+\.[a-zA-Z0-9-.]+$" class="form-control"
+                      [ngClass]="{ 'error-border': newForm.get('email').hasError('required') && (newForm.get('email').touched) }">
+                  </div>
+                  <div *ngIf="newForm.get('email').hasError('required') && (newForm.get('email').touched)"
+                    class="text-danger"> <i class="ft-alert-circle align-middle"></i>
+                    Email {{'IS_REQUIRED'|translate}}
+                  </div>
+                  <small class="col-12 text-danger pl-0" 
+                  *ngIf="newForm.get('email').hasError('pattern') && (newForm.get('email').touched)">
+                  Enter correct email!
+              </small>
+                </div>
+              </div>
+              <div class="col-12 col-sm-12">
+                <div class="form-group">
+                  <label for="phone">Phone<span
+                      class="required-field">*</span></label>
+                  <div class="controls">
+                    <input type="text" formControlName="phone"  required pattern="^(00)[0-9]{2}(\-)[7]{1}[0-9]{8}$" class="form-control"
+                    placeholder="0093-XXXXXXXXX" [ngClass]="{ 'error-border': newForm.get('phone').hasError('required') && (newForm.get('phone').touched) }">
+                  </div>
+                  <div *ngIf="newForm.get('phone').hasError('required') && (newForm.get('phone').touched)"
+                    class="text-danger"> <i class="ft-alert-circle align-middle"></i>
+                    Phone {{'IS_REQUIRED'|translate}}
+                  </div>
+                  <small class="col-12 text-danger pl-0" 
+                  *ngIf="newForm.get('phone').hasError('pattern') && (newForm.get('phone').touched)">
+                  Enter valid phone number!
+              </small>
+                </div>
+              </div>
+              <div class="col-12 col-sm-12">
+                <div class="form-group">
+                  <label for="address">Address<span
+                      class="required-field">*</span></label>
+                  <div class="controls">
+                      <textarea class="form-control" formControlName="address" cols="30" rows="5"
+                      [ngClass]="{ 'error-border': newForm.get('address').hasError('required') && (newForm.get('address').touched) }"
+                      >
+                    </textarea>
+                  </div>
+                  <div *ngIf="newForm.get('address').hasError('required') && (newForm.get('address').touched)"
+                    class="text-danger"> <i class="ft-alert-circle align-middle"></i>
+                    Address {{'IS_REQUIRED'|translate}}
+                  </div>
+                </div>
+              </div>
+            
+          </div>
+      </form>
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary btn-fill mr-2" (click)="onFormSubmit()">Submit</button>
+          <button class="btn btn-outline-danger btn-fill" (click)="closeModal()" type="button">Close</button>
+        </div>
+    </div>
+    <ngx-spinner class="loader" bdOpacity=0.3 bdColor="#f4f4f9" size="large" color="#b416f7" type="ball-spin-clockwise-fade"
+    [fullScreen]="true">
+  </ngx-spinner>

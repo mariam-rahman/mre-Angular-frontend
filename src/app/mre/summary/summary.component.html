@@ -1,0 +1,158 @@
+<!-- <section id="minimal-statistics-bg" class="d-flex justify-content-center"> -->
+ 
+  <br><br>
+  <div class="row">
+    <div class="col-xl-1 col-lg-6 col-12"></div>
+
+    <div class="col-xl-2 col-lg-6 col-12">
+      <div class="card card-inverse bg-info">
+        <div class="card-content">
+          <div class="card-body">
+            <div class="media">
+              <div class="media-body text-left">
+                <h3 class="card-text">{{totalUser}}</h3>
+                <span>Users</span>
+              </div>
+              <div class="media-right align-self-center">
+                <i class="ft-user font-large-1 float-right"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-2 col-lg-6 col-12">
+      <div class="card card-inverse bg-success">
+        <div class="card-content">
+          <div class="card-body">
+            <div class="media">
+              <div class="media-body text-left">
+                <h4 class="card-text">{{totalSells}}</h4>
+                <span>Sales</span>
+              </div>
+              <div class="media-right align-self-center">
+                <i class="ft-dollar-sign font-large-1 float-right"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-2 col-lg-6 col-12">
+      <div class="card card-inverse bg-primary">
+        <div class="card-content">
+          <div class="card-body">
+            <div class="media">
+              <div class="media-body text-left">
+                <h3 class="card-text">3</h3>
+                <span>Stocks</span>
+              </div>
+              <div class="media-right align-self-center">
+                <i class="ft-box font-large-1 float-right"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-2 col-lg-6 col-12">
+      <div class="card card-inverse bg-warning">
+        <div class="card-content">
+          <div class="card-body">
+            <div class="media">
+              <div class="media-body text-left">
+                <h3 class="card-text">{{totalExpenses}}</h3>
+                <span>Expenses</span>
+              </div>
+              <div class="media-right align-self-center">
+                <i class="fa fa-bolt font-large-1 float-right"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-2 col-lg-6 col-12">
+      <div class="card card-inverse bg-secondary">
+        <div class="card-content">
+          <div class="card-body">
+            <div class="media">
+              <div class="media-body text-left">
+                <h3 class="card-text">{{totalEmployee}}</h3>
+                <span>Employees</span>
+              </div>
+              <div class="media-right align-self-center">
+                <i class="ft-users font-large-1 float-right"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+<div class="row d-flex justify-content-center">
+  <div class="col-10 ">
+    <div class="form-group ">
+      <label for="customer">Year</label>
+      <div class="controls">
+        <select #yr (change)="setYear(yr.value)" class="form-control">
+          <option>Select year</option>
+          <option *ngFor="let y of years" [value]="y">
+            {{ y }}
+          </option>
+        </select>
+   
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- Bar Chart starts -->
+<div class="row d-flex justify-content-center">
+    <div class="col-10">
+      <div class="card">
+          <div class="card-header">
+              <h4 class="card-title">Sale's statistics</h4>
+          </div>
+          <div class="card-content">
+              <div class="card-body">
+                <apx-chart
+                [series]="barChartOptions.series"
+                [colors]="barChartOptions.colors"
+                [chart]="barChartOptions.chart"
+                [xaxis]="barChartOptions.xaxis"
+                [yaxis]="barChartOptions.yaxis"
+                [title]="barChartOptions.title"
+                [dataLabels]="barChartOptions.dataLabels"
+                [stroke]="barChartOptions.stroke"
+                [grid]="barChartOptions.grid"
+                [tooltip]="barChartOptions.tooltip"
+                [plotOptions]="barChartOptions.plotOptions"
+                [fill]="barChartOptions.fill"
+                [legend]="barChartOptions.legend"
+                [labels]="barChartOptions.labels"
+                [markers]="barChartOptions.markers"
+                [theme]="barChartOptions.theme"
+                [responsive]="barChartOptions.responsive"
+              ></apx-chart>
+              </div>
+          </div>
+      </div>
+  </div>
+  
+</div>
+
+
+
+
+
+<ngx-spinner class="loader" bdOpacity=0.3 bdColor="#f4f4f9" size="large" color="#2F8BE6" type="ball-spin-clockwise-fade"
+  [fullScreen]="true">
+</ngx-spinner>
+
+
+
+

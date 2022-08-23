@@ -1,0 +1,138 @@
+
+<div class="modal-header">
+    <h4 class="modal-title">Update Employee</h4>
+    <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row pl-4  pr-4" >
+      <form [formGroup]="editForm" enctype="multipart/form-data">
+        <div class="row">
+              <div class="col-md-12">
+                <fieldset class="form-group">
+                  <label for="name">Name<span
+                      class="required-field">*</span></label>
+                  <div class="controls">
+                    <input type="text" formControlName="name" required pattern="^[a-zA-Z ]{3,20}$" class="form-control"
+                      [ngClass]="{ 'error-border': editForm.get('name').hasError('required') && (editForm.get('name').touched) }">
+                  </div>
+                  <div *ngIf="editForm.get('name').hasError('required') && (editForm.get('name').touched)"
+                    class="text-danger"> <i class="ft-alert-circle align-middle"></i>
+                    Name {{'IS_REQUIRED'|translate}}
+                  </div>
+                  <small class="col-12 text-danger pl-0" 
+                  *ngIf="editForm.get('name').hasError('pattern') && (editForm.get('name').touched)">
+                  name must be between 3-20 charachters!
+              </small>
+                </fieldset>
+             
+            
+                <fieldset class="form-group">
+                  <label for="email">Email<span
+                      class="required-field">*</span></label>
+                  <div class="controls">
+                    <input type="email" formControlName="email"   class="form-control"
+                      [ngClass]="{ 'error-border': editForm.get('email').hasError('required') && (editForm.get('email').touched) }">
+                  </div>
+                  <div *ngIf="editForm.get('email').hasError('required') && (editForm.get('email').touched)"
+                    class="text-danger"> <i class="ft-alert-circle align-middle"></i>
+                    Email {{'IS_REQUIRED'|translate}}
+                  </div>
+                  <small class="col-12 text-danger pl-0" 
+                  *ngIf="editForm.get('email').hasError('email') && (editForm.get('email').touched)">
+                  Enter correct email!
+              </small>
+                </fieldset>
+              
+                <fieldset class="form-group">
+                  <label for="phone">Phone<span
+                      class="required-field">*</span></label> 
+                  <div class="controls">
+                    <input type="text" formControlName="phone"  required pattern="^(00)[0-9]{2}(\-)[0-9]+$" class="form-control"
+                    placeholder="0093-XXXXXXXXX" [ngClass]="{ 'error-border': editForm.get('phone').hasError('required') && (editForm.get('phone').touched) }">
+                  </div>
+                  <div *ngIf="editForm.get('phone').hasError('required') && (editForm.get('phone').touched)"
+                    class="text-danger"> <i class="ft-alert-circle align-middle"></i>
+                    Phone {{'IS_REQUIRED'|translate}}
+                  </div>
+                  <small class="col-12 text-danger pl-0" 
+                     *ngIf="editForm.get('phone').hasError('pattern') && (editForm.get('phone').touched)">
+                     Enter correct phone number!
+                 </small>
+
+
+                 <!-- SSK Solution -->
+                 <!-- <small class="col-12 text-danger pl-0"
+                 *ngIf="newForm.get('phone').hasError('required') && (newForm.get('phone').touched)">
+                   Phone number must not be empty
+                 </small> -->
+                 <!-- <small class="col-12 text-danger pl-0"
+                 *ngIf="newForm.get('phone').hasError('hasError') && (newForm.get('phone').touched)">
+                   Incorrect phone number
+                 </small> -->
+
+                </fieldset>
+            </div> 
+              
+            <div class="col-md-12">
+           
+          
+               
+                         
+                <fieldset class="form-group">
+                  <label for="joining_date">Joining Date<span
+                      class="required-field">*</span></label>
+                  <div class="controls">
+                    <input type="date" formControlName="joining_date" class="form-control"
+                      [ngClass]="{ 'error-border': editForm.get('joining_date').hasError('required') && (editForm.get('joining_date').touched) }">
+                  </div>
+                  <div *ngIf="editForm.get('joining_date').hasError('required') && (editForm.get('joining_date').touched)"
+                    class="text-danger"> <i class="ft-alert-circle align-middle"></i>
+                    Joining Date {{'IS_REQUIRED'|translate}}
+                  </div>
+                </fieldset>
+            </div>
+
+              <div class="col-md-12">
+                <img [src]="'http://127.0.0.1:8000/storage/'+data.image" height="100" alt="">
+                <fieldset class="form-group">
+                    <label for="image">Image<span
+                        class="required-field">*</span></label>
+                    <div class="controls">
+                      <input type="file" formControlName="image" class="form-control" (change) = "fileChangeEvent($event)"
+                       >
+                    </div>
+                  
+                  </fieldset>
+
+                <fieldset class="form-group">
+                  <label for="address">Address<span
+                      class="required-field">*</span></label>
+                  <div class="controls">
+                      <textarea class="form-control" formControlName="address" cols="30" rows="2"
+                      [ngClass]="{ 'error-border': editForm.get('address').hasError('required') && (editForm.get('address').touched) }"
+                      >
+                    </textarea>
+                  </div>
+                  <div *ngIf="editForm.get('address').hasError('required') && (editForm.get('address').touched)"
+                    class="text-danger"> <i class="ft-alert-circle align-middle"></i>
+                    Address {{'IS_REQUIRED'|translate}}
+                  </div>
+                </fieldset>
+
+               
+              </div>
+            
+              
+              
+          </div>
+      </form>
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary btn-fill mr-2" (click)="onFormSubmit()">Submit</button>
+          <button class="btn btn-outline-danger btn-fill" (click)="closeModal()" type="button">Close</button>
+        </div>
+    </div>
+    <ngx-spinner class="loader" bdOpacity=0.3 bdColor="#f4f4f9" size="large" color="#b416f7" type="ball-spin-clockwise-fade"
+    [fullScreen]="true">
+  </ngx-spinner>

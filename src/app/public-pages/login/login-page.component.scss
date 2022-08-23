@@ -1,0 +1,23 @@
+.alert-light-danger {
+  background-color: #FEEFD0 !important;
+  color: #F55252  !important;
+  border-color: #FEEFD0;
+}
+
+#image-container {
+  position: relative;
+}
+#login-card,
+#background-image {
+  position: absolute;
+}
+#login-card {
+  z-index: 10;
+}
+
+
+
+.card-body {
+  padding: 40px 0px 30px 0px !important
+}
+

@@ -1,0 +1,91 @@
+
+<div class="modal-header">
+    <h4 class="modal-title">{{formType==true?"Add Banner":"Edit Banner"}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row pl-4  pr-4" >
+      <form [formGroup]="newForm" enctype="multipart/form-data">
+        <div class="row">
+              <div class="col-12 col-sm-12">
+                <div class="form-group">
+                  <label for="title">Title<span
+                      class="required-field">*</span></label>
+                  <div class="controls">
+                    <input type="text" formControlName="title" required class="form-control"
+                      [ngClass]="{ 'error-border': newForm.get('title').hasError('required') && (newForm.get('title').touched) }">
+                  </div>
+                  <div *ngIf="newForm.get('title').hasError('required') && (newForm.get('title').touched)"
+                    class="text-danger"> <i class="ft-alert-circle align-middle"></i>
+                    Title {{'IS_REQUIRED'|translate}}
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-12">
+                <div class="form-group">
+                  <label for="title">Sub-Title<span
+                      class="required-field">*</span></label>
+                  <div class="controls">
+                    <input type="text" formControlName="sub_title"  class="form-control"
+                      [ngClass]="{ 'error-border': newForm.get('sub_title').hasError('required') && (newForm.get('sub_title').touched) }">
+                  </div>
+                  <div *ngIf="newForm.get('sub_title').hasError('required') && (newForm.get('sub_title').touched)"
+                    class="text-danger"> <i class="ft-alert-circle align-middle"></i>
+                    Sub-Title {{'IS_REQUIRED'|translate}}
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-12">
+                <div class="form-group">
+                  <label for="desc">Description<span
+                      class="required-field">*</span></label>
+                  <div class="controls">
+                      <textarea class="form-control" formControlName="description" cols="30" rows="10"
+                      [ngClass]="{ 'error-border': newForm.get('description').hasError('required') && (newForm.get('description').touched) }"
+                      >
+                    </textarea>
+                  </div>
+                  <div *ngIf="newForm.get('description').hasError('required') && (newForm.get('description').touched)"
+                    class="text-danger"> <i class="ft-alert-circle align-middle"></i>
+                    Description {{'IS_REQUIRED'|translate}}
+                  </div>
+            
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <img [src]="'http://127.0.0.1:8000/storage/'+imgPath" alt=""
+                class="users-avatar-shadow rounded" height="100" width="100">
+                <fieldset class="form-group">
+  
+                  <label for="image">Image<span class="required-field">*</span></label>
+                  <div class="controls">
+                    <input type="file" formControlName="image" class="form-control" (change)="fileChangeEvent($event)"
+                      [ngClass]="{
+                        'error-border':
+                          newForm.get('image').hasError('required') &&
+                          newForm.get('image').touched
+                      }" />
+                  </div> 
+                  <div *ngIf="
+                      newForm.get('image').hasError('required') &&
+                      newForm.get('image').touched
+                    " class="text-danger">
+                    <i class="ft-alert-circle align-middle"></i> Image
+                    {{ "IS_REQUIRED" | translate }}
+                  </div>
+                </fieldset>
+              </div>
+
+          </div>
+      </form>
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary btn-fill mr-2" (click)="onFormSubmit()">{{formType==true?"Submit":"Update"}}</button>
+          <button class="btn btn-outline-danger btn-fill" (click)="closeModal()" type="button">Close</button>
+        </div>
+    </div>
+    <ngx-spinner class="loader" bdOpacity=0.3 bdColor="#f4f4f9" size="large" color="#b416f7" type="ball-spin-clockwise-fade"
+    [fullScreen]="true">
+  </ngx-spinner>

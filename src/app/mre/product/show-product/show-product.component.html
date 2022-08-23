@@ -1,0 +1,51 @@
+<div class="modal-header">
+	<div class="modal-title">View product</div>
+	<button
+	type="button"
+	class="close"
+	aria-label="Close"
+	(click)="closeModal()">
+	<span aria-hidden="true">&times;</span>
+	</button>
+</div>
+
+<div class="modal-body">
+	<div class="row">
+		<div class="col-12 ">
+			<table class="table table-borderless">
+			  <tbody>
+				<tr>
+				  <td>Name:</td>
+				  <td>{{data.name}}</td>
+				</tr>
+				<tr>
+				  <td>Category:</td>
+				  <td >{{data.category}}</td>
+				</tr>
+				<tr>
+				  <td>Description:</td>
+				  <td >{{data.desc}}</td>
+				</tr>
+				
+				<tr>
+				  <td>Status:</td>
+				  <td><span class="badge badge-pill users-view-status"  [ngClass]="{'bg-light-success':data.active == 1 , 'bg-light-danger':data.active == 0}">{{data.active==1?'Active':'Inactive'}}</span></td>
+				</tr>
+			  </tbody>
+			</table>
+		  </div>
+<div class="col-12">
+	<img [src]="'http://127.0.0.1:8000/storage/'+data.image" height="150" alt="">
+</div>
+	</div>
+</div>
+<div
+	class="modal-footer col-12 d-flex flex-sm-row flex-column justify-content-end">
+	<button
+	type="button"
+	class="btn btn-outline-danger mb-1"
+	(click)="closeModal()"
+	>
+	{{ "CANCEL" | translate }}
+	</button>
+</div>

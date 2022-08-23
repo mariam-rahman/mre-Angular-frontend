@@ -1,0 +1,40 @@
+<div class="p-4">
+  <h4 class="modal-title mb-4" style="border-bottom: 1px solid #eee;">{{'PACKAGE_AVALIABLITITY'|translate}}</h4>
+  <form  [formGroup]="importForm">
+   <div style="text-align: center;">
+    <div class="switchery-success d-flex align-items-center w-100 justify-content:center m-3 row">
+      <div class="col-6" style="text-align: left;">
+        <label class="mr-2">{{'ACTIVE ?'|translate}}</label>
+      </div>
+      <div class="col-6" style="text-align: left;">
+        <ui-switch class="switchery" (change)="changeApprove($event)" size="small" [checked]="active==1?true:false"></ui-switch>
+      </div>
+     
+      <div class="col-6" style="text-align: left;">
+        <label class="mr-2">{{'AUTO_RENEWAL?'|translate}}</label>
+      </div>
+      <div class="col-6" style="text-align: left;">
+        <ui-switch class="switchery" (change)="changeAutoRenewal($event)" size="small" [checked]="auto_renewal==1?true:false" ></ui-switch>
+      </div>
+   
+      <div class="col-6" style="text-align: left;">
+        <label class="mr-2">{{'DISPLAY_ON_LIST ?'|translate}}</label>
+      </div>
+      <div class="col-6" style="text-align: left;">
+        <ui-switch class="switchery" (change)="changeIslist($event)" size="small" [checked]="isList==1?true:false"></ui-switch>
+      </div>
+    
+    </div>
+   </div>
+        
+      
+  <div style="text-align: left;">
+    <button class="btn btn-success"  [disabled]="loading" (click)="submit()" >{{ 'SAVE' | translate
+      }}</button>
+    <button class="btn btn-warning ml-2" type="button" (click)="closeModal()">{{ 'CLOSE' | translate }}</button>
+  </div>
+  </form>
+</div>
+
+
+

@@ -1,0 +1,92 @@
+
+<div class="modal-header">
+    <h4 class="modal-title">Purchase Product</h4>
+    <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row pl-4  pr-4" >
+      <form [formGroup]="newForm">
+        <div class="row">
+            <div class="col-12 col-sm-12"> 
+                <div class="form-group">
+                  <label for="product">Product<span
+                      class="required-field">*</span></label>
+                  <div class="controls">
+                    <div class="form-group">
+                      <ng-select [items]="products" [virtualScroll]="true" bindLabel="name" bindValue="id" formControlName="product_id"
+                         [(ngModel)]="selectedProductId"  [ngClass]="{ 'error-border': newForm.get('product_id').hasError('required') && (newForm.get('product_id').touched) }">
+                      </ng-select>
+                      <div *ngIf="newForm.get('product_id').hasError('required') && (newForm.get('product_id').touched)"
+                      class="text-danger"> <i class="ft-alert-circle align-middle"></i>
+                      Product {{'IS_REQUIRED'|translate}}
+                    </div> 
+                    </div> 
+                               
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-sm-12">
+                <div class="form-group">
+                  <label for="category">Stock<span
+                      class="required-field">*</span></label>
+                  <div class="controls">
+                    <select #stockValue (change)='setStock(stockValue.value)' class="form-control">
+                    <option disabled selected>Select</option>     
+                      <option value="1">Main Stock</option> 
+                      <option value="2">Sub Stock</option> 
+                    </select>  
+                    <span *ngIf="cerror" class="text-danger"><i class="ft-alert-circle align-middle"></i>Category is required</span>              
+                  </div>
+                  
+                </div>
+              </div>
+
+        
+              <div class="col-12 col-sm-12">
+                <div class="form-group">
+                  <label for="name">Qty<span
+                      class="required-field">*</span></label>
+                  <div class="controls">
+                    <input type="text" formControlName="qty" required pattern="^[1-9]{1}[0-9]*$" class="form-control"
+                      [ngClass]="{ 'error-border': newForm.get('qty').hasError('required') && (newForm.get('qty').touched) }">
+                  </div>
+                  <div *ngIf="newForm.get('qty').hasError('required') && (newForm.get('qty').touched)"
+                    class="text-danger"> <i class="ft-alert-circle align-middle"></i>
+                    Qty {{'IS_REQUIRED'|translate}}
+                  </div>
+                  <small class="col-12 text-danger pl-0" 
+                  *ngIf="newForm.get('qty').hasError('pattern') && (newForm.get('qty').touched)">
+                  Quantity must be atlest one!
+              </small>
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-12"> 
+                <div class="form-group">
+                  <label for="name">Price<span
+                      class="required-field">*</span></label>
+                  <div class="controls">
+                    <input type="text" formControlName="price" required pattern="^[1-9]+[0-9]*$" class="form-control"
+                      [ngClass]="{ 'error-border': newForm.get('price').hasError('required') && (newForm.get('price').touched) }">
+                  </div>
+                  <div *ngIf="newForm.get('price').hasError('required') && (newForm.get('price').touched)"
+                    class="text-danger"> <i class="ft-alert-circle align-middle"></i>
+                    Price {{'IS_REQUIRED'|translate}}
+                  </div>
+                  <small class="col-12 text-danger pl-0" 
+                  *ngIf="newForm.get('price').hasError('pattern') && (newForm.get('price').touched)">
+                  Price must be atlest one!
+              </small>
+                </div>
+              </div>
+              
+          </div>
+      </form>
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary btn-fill mr-2" (click)="onFormSubmit()">Submit</button>
+          <button class="btn btn-outline-danger btn-fill" (click)="closeModal()" type="button">Close</button>
+        </div>
+    </div>
+  

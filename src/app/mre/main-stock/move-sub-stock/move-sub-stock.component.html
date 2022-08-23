@@ -1,0 +1,38 @@
+<div class="modal-header">
+    <h4 class="modal-title">Product move To Sub-Stock</h4>
+    <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row pl-4  pr-4" >
+      <form [formGroup]="newForm" enctype="multipart/form-data">
+          <div class="row">
+              <div class="col-md-12" style="width: 450px;">
+                <div class="form-group">
+                  <label for="move_qty">Quantity to move<span
+                      class="required-field">*</span></label>
+                    <input type="number" min="1" formControlName="move_qty" required pattern="^[1-9]{1}[0-9]{0,5}$" required pattern="^[1-9]+[0-9]*$" class="form-control"
+                      [ngClass]="{ 'error-border': newForm.get('move_qty').hasError('required') && (newForm.get('move_qty').touched) }">
+                 
+                  <div *ngIf="newForm.get('move_qty').hasError('required') && (newForm.get('move_qty').touched)"
+                    class="text-danger"> <i class="ft-alert-circle align-middle"></i>
+                    Quantity {{'IS_REQUIRED'|translate}}
+                  </div>
+                  <small class="col-12 text-danger pl-0" 
+                  *ngIf="newForm.get('move_qty').hasError('pattern') && (newForm.get('move_qty').touched)">
+                  Quantity must be 1 - 6 digits!
+              </small>
+                </div>
+              </div>
+            </div>
+          
+      </form>
+        <div class="col-12">
+          <button type="submit" class="btn btn-warning btn-fill" (click)="onFormSubmit()">Move</button>
+          <button class="btn btn-outline-danger btn-fill ml-2" (click)="closeModal()" type="button">Close</button>
+        </div>
+    </div>
+    <ngx-spinner class="loader" bdOpacity=0.3 bdColor="#f4f4f9" size="large" color="#b416f7" type="ball-spin-clockwise-fade"
+    [fullScreen]="true">
+  </ngx-spinner>

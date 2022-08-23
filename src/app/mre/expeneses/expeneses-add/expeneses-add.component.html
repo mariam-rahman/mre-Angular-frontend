@@ -1,0 +1,47 @@
+<div class="modal-header">
+  <h4 class="modal-title"> {{ id != 0 ? 'Update category' : 'Create category'}} </h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.close()">
+    x
+  </button>
+</div>
+<form [formGroup]="newForm" (ngSubmit)="submitForm()">
+  <div class="modal-body taskboard-modal">
+    <div class="container">
+      <fieldset class="form-group">
+        <label for="name">Name<span
+          class="required-field">*</span></label>
+        <input type="text" formControlName="name" required pattern="^[a-zA-Z]{3,20}\s?([a-zA-Z0-9 ]{1,20})?$" class="form-control"
+          id="todoTitle"  (keydown.enter)="$event.preventDefault()" required #todoTitle
+          [ngClass]="{ 'error-border': newForm.get('name').hasError('required') && (newForm.get('name').touched) }">  
+      <div *ngIf="newForm.get('name').hasError('required') && (newForm.get('name').touched)"
+      class="text-danger"> <i class="ft-alert-circle align-middle"></i>
+      Name {{'IS_REQUIRED'|translate}}
+    </div>
+    <small class="col-12 text-danger pl-0" 
+    *ngIf="newForm.get('name').hasError('pattern') && (newForm.get('name').touched)">
+    Name must be between 3-20 charachters!
+</small>
+</fieldset>
+      <fieldset class="form-group">
+        <label for="name">Description<span
+          class="required-field">*</span></label>
+        <textarea formControlName="discription" class="form-control"
+          id="todoMessage" (keydown.enter)="$event.preventDefault()" required #todoMessage
+          [ngClass]="{ 'error-border': newForm.get('discription').hasError('required') && (newForm.get('discription').touched) }">
+        <div class="form-control-position control-position-right">
+          <i class="ft-message-square"></i>
+        </div>
+      </textarea>
+      <div *ngIf="newForm.get('discription').hasError('required') && (newForm.get('discription').touched)"
+      class="text-danger"> <i class="ft-alert-circle align-middle"></i>
+      Description {{'IS_REQUIRED'|translate}}
+    </div>
+  </fieldset>
+    </div>
+  </div>
+  <div class="modal-footer taskboard-modal-footer">
+    <button class="btn btn-primary btn-save">
+      {{ id != 0 ? 'Update' : 'Create'}}
+    </button>
+  </div>
+</form>

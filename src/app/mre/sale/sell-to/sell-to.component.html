@@ -1,0 +1,235 @@
+<div class="modal-header">
+  <h4 class="modal-title">Sell Product</h4>
+  <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <!-- Customer form -->
+  <div class="row text-left" *ngIf="!showCustomerForm">
+    <div class="col-12">
+      <div class="content-header">
+        <button type="button" class="btn btn-outline-info btn-icon round mr-1 mb-1 pull-right" (click)="addNew()"
+          title="Sell Product">
+          <i *ngIf="showSellProductForm" class="ft ft-align-right"></i>
+          <i *ngIf="showSellProductList" class="ft ft-plus"></i>
+          <i *ngIf="showPaymentForm" class="ft ft-align-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <form [formGroup]="customerForm" *ngIf="showCustomerForm">
+    <div class="row pl-2 pr-2">
+      <div class="col-sm-12">
+        <div class="form-group">
+          <label for="customer">Customer<span class="required-field">*</span></label>
+          <div class="controls">
+            <select #customer (change)="setCustomer(customer.value)" class="form-control">
+              <option>Select Customer</option>
+              <option *ngFor="let c of customers" [value]="c.id">
+                {{ c.name }}
+              </option>
+            </select>
+            <span *ngIf="cerror" class="text-danger"><i class="ft-alert-circle align-middle"></i>Customer is
+              required</span>
+          </div>
+        </div>
+      </div>
+  
+
+      <!-- we shift Stock_id from sale to sale_Details table -->
+
+      <!-- <div class="col-6">
+        <div class="form-group">
+          <label for="category">Stock<span class="required-field">*</span></label>
+          <div class="controls">
+            <select #stockValue (change)="setStock(stockValue.value)" class="form-control">
+              <option disabled [attr.selected]="idStock==null?true:null">Select</option>
+              <option value="1"  [attr.selected]="idStock==1?true:null">Main Stock</option>
+              <option value="2" [attr.selected]="idStock==2?true:null">Sub Stock</option>
+              <option value="3" [attr.selected]="idStock==3?true:null">On Sale</option>
+            </select>
+            <span *ngIf="cerror" class="text-danger"><i class="ft-alert-circle align-middle"></i>Stock is
+              required</span>
+          </div>
+        </div>
+      </div> -->
+    </div>
+  </form>
+  <!-- =====End=== -->
+
+
+<!-- add products Form -->
+  <form [formGroup]="newForm" *ngIf="showSellProductForm">
+    <div class="row">
+      <div class="col-12 col-sm-12">
+        <div class="form-group">
+          <label for="stock">Stock<span class="required-field">*</span></label>
+          <div class="controls">
+            <select #stockValue (change)="setStock(stockValue.value)" class="form-control">
+              <option >Select</option>
+              <option value="1">Main Stock</option>
+              <option value="2">Sub Stock</option>
+              <option value="3">On Sale</option>
+            </select>
+            <span *ngIf="cerror" class="text-danger"><i class="ft-alert-circle align-middle"></i>Stock is
+              required</span>
+          </div>
+        </div>
+      </div>
+      <!-- <select #stockValue (change)="setStock(stockValue.value)" class="form-control">
+        <option disabled [attr.selected]="idStock==null?true:null">Select</option>
+        <option value="1"  [attr.selected]="idStock==1?true:null">Main Stock</option>
+        <option value="2" [attr.selected]="idStock==2?true:null">Sub Stock</option>
+        <option value="3" [attr.selected]="idStock==3?true:null">On Sale</option>
+      </select> -->
+
+     
+      <div class="col-12 col-sm-12">
+        <label for="sell_price">Product<span class="required-field">*</span></label>
+        <div class="form-group">
+          <ng-select [items]="products" [virtualScroll]="true" bindLabel="name" bindValue="id" formControlName="product_id"
+             [(ngModel)]="selectedProductId"  [ngClass]="{ 'error-border': newForm.get('product_id').hasError('required') && (newForm.get('product_id').touched) }">
+          </ng-select>
+
+        
+
+          <span *ngIf="stockValue == null" class="text-danger"><i class="ft-alert-circle align-middle"></i>Category is required</span> 
+            
+          <div *ngIf="newForm.get('product_id').hasError('required') && (newForm.get('product_id').touched)"
+          class="text-danger"> <i class="ft-alert-circle align-middle"></i>
+         Product {{'IS_REQUIRED'|translate}}
+        </div> 
+        </div> 
+      </div>
+
+      <div class="col-12 col-sm-12">
+        <div class="form-group">
+          <label for="sell_price">Sell Price<span class="required-field">*</span></label>
+          <div class="controls">
+            <input type="text" class="form-control" formControlName="sell_price" required pattern="^[1-9]+[0-9]*$"
+            [ngClass]="{ 'error-border': newForm.get('sell_price').hasError('required') && (newForm.get('sell_price').touched) }">
+          </div>
+          <div *ngIf="newForm.get('sell_price').hasError('required') && (newForm.get('sell_price').touched)"
+             class="text-danger"> <i class="ft-alert-circle align-middle"></i>
+            Price {{'IS_REQUIRED'|translate}}
+          </div>
+          <small class="col-12 text-danger pl-0" 
+          *ngIf="newForm.get('sell_price').hasError('pattern') && (newForm.get('sell_price').touched)">
+          Price must be atlest one!
+      </small>
+        </div>
+      </div>
+      <div class="col-12 col-sm-12">
+        <div class="form-group">
+          <label for="qty">Quantity<span class="required-field">*</span></label>
+          <div class="controls">
+            <input type="text" class="form-control" formControlName="qty" required pattern="^[1-9]{1}[0-9]*$"
+            [ngClass]="{ 'error-border': newForm.get('qty').hasError('required') && (newForm.get('qty').touched) }">
+          </div>
+          <div *ngIf="newForm.get('qty').hasError('required') && (newForm.get('qty').touched)"
+                    class="text-danger"> <i class="ft-alert-circle align-middle"></i>
+                    Qty {{'IS_REQUIRED'|translate}}
+          </div>
+          <small class="col-12 text-danger pl-0" 
+          *ngIf="newForm.get('qty').hasError('pattern') && (newForm.get('qty').touched)">
+          Quantity must be atlest one!
+      </small>
+        </div>
+      </div>
+    </div>
+  </form>
+  <!-- End add products form -->
+
+  <!-- Sell product list -->
+  <section id="ngx-datatables-server-side" *ngIf="showSellProductList">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <div class="form-row">
+              <button class="btn btn-outline-success px-4 pt-2 pb-1" (click)="showPayForm()">
+                <div class="font-weight-bold">
+                  <h4 class="text-center success">Pay</h4>
+                </div>
+              </button>
+            </div>
+          </div>
+          <ng-container>
+            <ngx-datatable #table class="bootstrap core-bootstrap" [rows]="rows" [columnMode]="ColumnMode.force"
+              [headerHeight]="50" [footerHeight]="50" rowHeight="auto" [limit]="10">
+              <ngx-datatable-column [name]="ID" prop="id" [width]="50">
+                <ng-template ngx-datatable-cell-template let-value="value">
+                  {{ value }}
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column [name]="'Product Name'" prop="productName"></ngx-datatable-column>
+              <ngx-datatable-column [name]="'Quqntity'" prop="qty"></ngx-datatable-column>
+              <ngx-datatable-column [name]="'Price'" prop="sell_price"></ngx-datatable-column>
+              <ngx-datatable-column [name]="Actions" [width]="100">
+                <ng-template ngx-datatable-cell-template let-row="row" let-rowIndex="row_index">
+                  <ngx-spinner bdColor="rgba(255, 255, 255, 0.100)" size="medium" color="black"
+                    type="ball-scale-multiple" fullScreen="false">
+                  </ngx-spinner>
+
+                  <button type="button" class="btn btn-icon round" (click)="deleteProduct(row.id,row.qty,row.product_id)"
+                    title="Delete product">
+                    <i class="ft-trash text-danger cursor-pointer"></i>
+                  </button>
+                </ng-template>
+              </ngx-datatable-column>
+            </ngx-datatable>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- /End -->
+
+
+  <!-- Payment -->
+
+  <form [formGroup]="pForm" *ngIf="showPaymentForm">
+    <div class="row">
+      <h4 class="ml-2 text-muted">Total amount: <span class="ml-2 text-muted">{{total_sell_price}}</span> </h4>
+      <div class="col-12 col-sm-12">
+        <div class="form-group">
+          <label for="qty">Total paid<span class="required-field">*</span></label>
+          <div class="controls">
+            <input type="text" class="form-control" formControlName="payment" required pattern="^[0-9]+$"
+            [ngclass]="{'error-border':pForm.get('payment').hasError('required') && (pForm.get('payment').touched)}">
+          </div>
+          <div *ngIf="pForm.get('payment').hasError('required') && (pForm.get('payment').touched)"
+             class="text-danger"> <i class="ft-alert-circle align-middle"></i>
+            Payment is Required!
+          </div>
+          <small class="col-12 text-danger pl-0" 
+          *ngIf="pForm.get('payment').hasError('pattern') && (pForm.get('payment').touched)">
+          Payment bust not be null!
+      </small>
+        </div>
+      </div>
+    </div>
+  </form>
+<!-- end -->
+
+
+  <div class="col-12">
+   
+    <button *ngIf="showCustomerForm" class="btn btn-primary btn-fill ml-2" (click)="onFormSubmit()">
+      Next
+    </button>
+
+    <button *ngIf="showSellProductForm" class="btn btn-primary btn-fill ml-2" (click)="addSellProduct()">
+      Create
+    </button>
+   
+    <button *ngIf="showPaymentForm" class="btn btn-primary btn-fill ml-2" (click)="addPayment()">
+      Continue
+    </button> 
+
+    <button class="btn btn-outline-danger btn-fill ml-2" (click)="closeModal()" type="button">
+      Close
+    </button>
+  </div>
+</div>

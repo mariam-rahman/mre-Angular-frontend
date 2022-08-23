@@ -1,0 +1,12 @@
+.modal-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 200% !important;
+    pointer-events: auto;
+    background-color: rgb(211, 21, 21) !important;
+    background-clip: padding-box;
+    border: 1px solid transparent;
+    border-radius: 0.35rem;
+    outline: 0;
+}

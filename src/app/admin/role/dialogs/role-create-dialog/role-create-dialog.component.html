@@ -1,0 +1,43 @@
+<div class="modal-header">
+  <h4 class="modal-title">Create Role</h4>
+  <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="row">
+    <form class="col-12" [formGroup]="newForm" (ngSubmit)="onFormSubmit()">
+      <div class="col-12 form-group">
+        <label>Permission</label>
+        <ng-select [items]="data"  [multiple]="true" [virtualScroll]="true" bindLabel="name" bindValue="id" placeholder="Select Permission(s)"
+          formControlName="permissions"   [ngClass]="{ 'error-border': newForm.get('permissions').hasError('required') && (newForm.get('permissions').touched) }">
+        </ng-select>
+        <div *ngIf="newForm.get('permissions').hasError('required') && (newForm.get('permissions').touched)"
+        class="text-danger"> <i class="ft-alert-circle align-middle"></i>
+        Permission {{'IS_REQUIRED'|translate}}
+      </div> 
+      </div>
+      <div class="col-12 form-group">
+        <label>Name<span class="required-field">*</span></label>
+          <div class="form-group">
+            <input type="text" placeholder="Enter role name" class="form-control" formControlName="name" required
+              [ngClass]="{'error-border':newForm.get('name').hasError('required') && newForm.get('name').touched }" />
+          </div>
+          <div *ngIf="newForm.get('name').hasError('required') && (newForm.get('name').touched)"
+          class="text-danger"> <i class="ft-alert-circle align-middle"></i>
+          Name {{'IS_REQUIRED'|translate}}
+        </div>
+        </div>
+   
+     
+      <div class="col-12">
+        <button type="submit" class="btn btn-primary btn-fill mr-2">
+          Submite
+        </button>
+        <button class="btn btn-outline-danger btn-fill " (click)="closeModal()" type="button">
+          Close
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

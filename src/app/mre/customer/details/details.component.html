@@ -1,0 +1,94 @@
+
+<section id="ngx-datatables-server-side">
+    <div class="row text-left"> 
+        <div class="col-12">
+            <div class="content-header">
+				<div class="bb">
+					<div> Customer Details</div>
+              
+			   <div>
+                <button type="button" class="btn btn-outline-info btn-icon round mr-1 mb-1 pull-right" (click)="refresh()"
+                  title="Refresh"  [class.fa-spin]="loading" >
+                    <i class="ft ft-refresh-cw"></i>
+                </button>
+                <a class="btn btn-outline-info round mr-2 mb-1 pull-right" routerLink="/../customers">Back</a>
+            </div>
+			</div>
+               
+            </div> 
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+				
+                <div class="card-header"> 
+
+                    <div class="row d-flex mt-4">
+
+                        <div class="col-4 d-flex">
+                            <ul>
+                            <li class=" d-flex mb-2">
+                                <h4 class="text-primary">Total Paid:</h4>
+                                <div class="card-title ml-2">{{debt_paid.paid}}</div>
+                            </li>
+                            </ul>
+                
+                        </div>
+                        <div class="col-4 d-flex">
+                            <ul>
+                                <li class=" d-flex mb-2">
+                                    <h4 class="text-primary">Total Debt:</h4>
+                                    <div class="card-title ml-2">{{debt_paid.debt}}</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-row">
+                        <div class="col-md-4 col-12 ml-auto">
+                            <div class="input-group">
+                                <input type="text" #searchBar class="form-control">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="button" (click)="searchTerm(searchBar.value)">
+                                        <i class="ft ft-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+                        <ng-container >
+                            <ngx-datatable #table class="bootstrap core-bootstrap" [rows]="rows"
+                                [columnMode]="ColumnMode.force" [headerHeight]="50" [footerHeight]="50" rowHeight="auto"
+                                [limit]="10" >
+                                <ngx-datatable-column name="{{'ID'|translate}}"  [width]="50">
+                                    <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row">
+                                        {{rowIndex+1}}
+                                      </ng-template> 
+
+				</ngx-datatable-column>
+                                <ngx-datatable-column [name]="'Product Name'" prop="product_name"></ngx-datatable-column>
+								<ngx-datatable-column [name]="'Price'" prop="price"></ngx-datatable-column>
+								<ngx-datatable-column [name]="'Quantity'" prop="qty"></ngx-datatable-column>
+								<ngx-datatable-column [name]="'Stock'">
+                                    <ng-template let-row='row' ngx-datatable-cell-template>
+                                           {{row.stock_id == 1?'Main stock':'Sub stock'}}
+                                    </ng-template>
+                                </ngx-datatable-column>
+								<ngx-datatable-column [name]="'Date'" prop="date">
+                                    <ng-template let-row='row' ngx-datatable-cell-template>
+                                        {{row.date|date:'MMM d, y'}}
+                                    </ng-template>
+                                </ngx-datatable-column>
+                      
+                            </ngx-datatable>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,117 @@
+
+<section id="ngx-datatables-server-side">
+	<div class="row">
+		<div class="col-12 mt-2 bb">
+			<h4 *ngIf = "monthly" >Monthly Expenses</h4>
+			<h4 *ngIf = "daily">Daily Expenses</h4>
+			
+			<div>
+				<a class="btn btn-outline-info round mr-2" routerLink="/..//expenses">Back</a>
+            </div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-12">
+			<div class="card">
+				<div class="card-header">
+					<div class="row">
+						<div class="col-12">
+							<div class="users-list-filter px-2">
+								<form autocomplete="off" [formGroup]="filterForm" (submit)="applyFilter()">
+									<div class="row mb-2 mx-n2">
+										<div class="col-12 col-sm-6 col-lg-3">
+											<label for="users-list-verified">Customer name</label>
+											<fieldset class="form-group">
+												<input type="text" class="form-control" formControlName="cutomer_name" />
+											</fieldset>
+										</div>
+										<div class="col-12 col-sm-6 col-lg-2 d-flex align-items-center">
+											<button type="submit" class="btn btn-primary btn-block users-list-clear">
+												{{'SEARCH'|translate}}
+											</button>&nbsp;
+											<button type="reset" (click)="resetFilters()"
+												class="btn btn-warning btn-block users-list-clear"
+												style="margin-top:initial">
+												{{'CLEAR'|translate}}
+											</button>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+						<!-- Filter ends -->
+					</div>
+					<hr>
+					<button type="button" class="btn btn-outline-info btn-icon round mr-1 mb-1 pull-right"
+						title="Refresh" (click)="reload()">
+						<i class="ft ft-refresh-cw"></i>
+					</button>
+					<button type="button" class="btn btn-outline-info btn-icon round mr-1 mb-1 pull-right"
+						title="Add Daily expenses" [disabled]="loading" (click)="addNew()">
+						<i class="ft ft-plus"></i>
+					</button>
+
+					<div class="col-md-3 col-3">
+						<div class="form-group">
+							<select #pageLength (change)='setPageLength(pageLength.value)' class="form-control">
+								<option *ngFor="let pl of pageLengths" [selected]="pl.id==10" [value]="pl.id">
+									{{ pl.count }} {{ 'RECORDS' | translate }}
+								</option>
+								<!-- <option value="-1">{{ 'ALL' | translate }}</option> -->
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="card-content">
+					<div class="card-body">
+						<ng-container *ngIf="tableOptions">
+							<!-- ngx-datatables-server-side -->
+							<ngx-datatable #table class="bootstrap core-bootstrap" [rows]="rows" [columns]="columns"
+								[virtualization]="false" [columnMode]="ColumnMode.force" [headerHeight]="50"
+								[footerHeight]="50" rowHeight="auto" [limit]="tableOptions.length"
+								[loadingIndicator]="dataLoadingFlag" [scrollbarH]="true" (page)="setPage($event)"
+								[reorderable]="reorderable" [swapColumns]="swapColumns" [externalPaging]="true"
+								[externalSorting]="true" [count]="recordsTotal" [offset]="0"
+								[sorts]="[{prop: 'id', dir: 'desc'}]" (sort)="onSort($event)">
+								<ngx-datatable-column name="{{'ID'|translate}}"  [width]="50">
+                                    <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row">
+                                        {{rowIndex+1}}
+                                      </ng-template>
+								</ngx-datatable-column>
+								<ngx-datatable-column name="Name" prop="employee_name" [width]="80">
+								</ngx-datatable-column>
+								<ngx-datatable-column name="Event" prop="event" [width]="80">
+								</ngx-datatable-column>
+								<ngx-datatable-column name="Amount" prop="amount" [width]="80">
+								</ngx-datatable-column>
+								<ngx-datatable-column name="Description" prop="description" [width]="80">
+								</ngx-datatable-column>
+                                <ngx-datatable-column name="Date"  [width]="80">
+									<ng-template let-row="row" ngx-datatable-cell-template>
+										{{row.date|date:'MMM d,y'}}
+									</ng-template>
+								</ngx-datatable-column>
+								<ngx-datatable-column name="{{'ACTIONS'|translate}}" [width]="100" [sortable]="false">
+									<ng-template let-row="row" ngx-datatable-cell-template>
+									
+									
+										<button type="button" class="btn btn-icon round"
+											title="Delete Product" (click)="deleteRecord(row.id)">
+											<i class="ft ft-trash text-danger cursor-pointer"></i>
+										</button>
+										<button type="button" class="btn btn-icon text-primary round"
+										 (click)="editRecord(row)" title="Edit Product">
+                                         <i class="ft-edit text-primary cursor-pointer"></i>
+                                            </button>
+										
+									</ng-template>
+								</ngx-datatable-column>
+							</ngx-datatable>
+							<!--/ ngx-datatables-server-side -->
+						</ng-container>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

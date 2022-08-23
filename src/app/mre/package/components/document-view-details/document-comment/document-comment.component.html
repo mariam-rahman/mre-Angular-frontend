@@ -1,0 +1,204 @@
+<div class="modal-header">
+    <h4 class="modal-title">Add child package</h4>
+    <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row pl-4  pr-4" >
+      <form [formGroup]="newForm" id="newForm" enctype="multipart/form-data">
+        <div class="row">
+          <div class="col-12 col-sm-12">
+            <div class="row">
+              <div class="col-lg-4 col-md-4 col-sm-12">
+                <div class="form-group">
+                  <label for="code">{{'CODE'|translate}}<span
+                      class="required-field">*</span></label>
+                  <div class="controls">
+                    <input type="text" formControlName="code" class="form-control"
+                      [ngClass]="{ 'error-border': newForm.get('code').hasError('required') && (newForm.get('code').touched) }">
+                  </div>
+                  <div *ngIf="newForm.get('code').hasError('required') && (newForm.get('code').touched)"
+                    class="text-danger"> <i class="ft-alert-circle align-middle"></i>
+                    {{'CODE'|translate}} {{'IS_REQUIRED'|translate}}
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-12">
+                <div class="form-group">
+                  <label for="sub_code">{{'SUB_CODE'|translate}}<span
+                      class="required-field">*</span></label>
+                  <div class="controls">
+                    <input type="text" formControlName="sub_code" class="form-control"
+                      [ngClass]="{ 'error-border': newForm.get('sub_code').hasError('required') && (newForm.get('sub_code').touched) }">
+                  </div>
+                  <div *ngIf="newForm.get('sub_code').hasError('required') && (newForm.get('sub_code').touched)"
+                    class="text-danger"> <i class="ft-alert-circle align-middle"></i>
+                    {{'SUB_CODE'|translate}} {{'IS_REQUIRED'|translate}}
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-12">
+                <div class="form-group">
+                  <label for="validity">{{'VALIDITY'|translate}}<span
+                      class="required-field">*</span></label>
+                  <div class="controls">
+                    <input type="text" formControlName="validity" class="form-control"
+                      [ngClass]="{ 'error-border': newForm.get('validity').hasError('required') && (newForm.get('validity').touched) }">
+                  </div>
+                  <div *ngIf="newForm.get('validity').hasError('required') && (newForm.get('validity').touched)"
+                    class="text-danger"> <i class="ft-alert-circle align-middle"></i>
+                    {{'VALIDITY'|translate}} {{'IS_REQUIRED'|translate}}
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-12">
+                <div class="form-group">
+                  <label for="price">{{'PRICE'|translate}}<span
+                      class="required-field">*</span></label>
+                  <div class="controls">
+                    <input type="text" formControlName="price" class="form-control"
+                      [ngClass]="{ 'error-border': newForm.get('price').hasError('required') && (newForm.get('price').touched) }">
+                  </div>
+                  <div *ngIf="newForm.get('price').hasError('required') && (newForm.get('price').touched)"
+                    class="text-danger"> <i class="ft-alert-circle align-middle"></i>
+                    {{'PRICE'|translate}} {{'IS_REQUIRED'|translate}}
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-12">
+                <div class="form-group">
+                  <label for="amount">{{'AMOUNT'|translate}}<span
+                      class="required-field">*</span></label>
+                  <div class="controls">
+                    <input type="text" formControlName="amount" class="form-control"
+                      [ngClass]="{ 'error-border': newForm.get('amount').hasError('required') && (newForm.get('amount').touched) }">
+                  </div>
+                  <div *ngIf="newForm.get('amount').hasError('required') && (newForm.get('amount').touched)"
+                    class="text-danger"> <i class="ft-alert-circle align-middle"></i>
+                    {{'AMOUNT'|translate}} {{'IS_REQUIRED'|translate}}
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-12">
+                <div class="form-group">
+                  <label for="amount_value">{{'AMOUNT_VALUE'|translate}}<span
+                      class="required-field">*</span></label>
+                  <div class="controls">
+                    <input type="text" formControlName="amount_value" class="form-control"
+                      [ngClass]="{ 'error-border': newForm.get('amount_value').hasError('required') && (newForm.get('amount_value').touched) }">
+                  </div>
+                  <div *ngIf="newForm.get('amount_value').hasError('required') && (newForm.get('amount_value').touched)"
+                    class="text-danger"> <i class="ft-alert-circle align-middle"></i>
+                    {{'AMOUNT_VALUE'|translate}} {{'IS_REQUIRED'|translate}}
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-8 col-md-8 col-sm-12">
+                <div class="form-group">
+                  <label for="name_en">{{'NAME_EN'|translate}}<span
+                      class="required-field">*</span></label>
+                  <div class="controls">
+                    <input type="text" formControlName="name_en" class="form-control"
+                      [ngClass]="{ 'error-border': newForm.get('name_en').hasError('required') && (newForm.get('name_en').touched) }">
+                  </div>
+                  <div *ngIf="newForm.get('name_en').hasError('required') && (newForm.get('name_en').touched)"
+                    class="text-danger"> <i class="ft-alert-circle align-middle"></i>
+                    {{'NAME_EN'|translate}} {{'IS_REQUIRED'|translate}}
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-8 col-md-8 col-sm-12">
+                <div class="form-group">
+                  <label for="name_en">{{'NAME_FA'|translate}}<span
+                      class="required-field">*</span></label>
+                  <div class="controls">
+                    <input type="text" formControlName="name_fa" class="form-control"
+                      [ngClass]="{ 'error-border': newForm.get('name_fa').hasError('required') && (newForm.get('name_fa').touched) }">
+                  </div>
+                  <div *ngIf="newForm.get('name_fa').hasError('required') && (newForm.get('name_fa').touched)"
+                    class="text-danger"> <i class="ft-alert-circle align-middle"></i>
+                    {{'NAME_FA'|translate}} {{'IS_REQUIRED'|translate}}
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-8 col-md-8 col-sm-12">
+                <div class="form-group">
+                  <label for="name_ps">{{'NAME_PS'|translate}}<span
+                      class="required-field">*</span></label>
+                  <div class="controls">
+                    <input type="text" formControlName="name_ps" class="form-control"
+                      [ngClass]="{ 'error-border': newForm.get('name_ps').hasError('required') && (newForm.get('name_ps').touched) }">
+                  </div>
+                  <div *ngIf="newForm.get('name_ps').hasError('required') && (newForm.get('name_ps').touched)"
+                    class="text-danger"> <i class="ft-alert-circle align-middle"></i>
+                    {{'NAME_PS'|translate}} {{'IS_REQUIRED'|translate}}
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="form-group">
+                  <label for="details_en">{{'DETAILS_EN'|translate}}<span
+                      class="required-field">*</span></label>
+                  <div class="controls">
+                    <textarea class="form-control" style="width: 100%;" formControlName="details_en"  rows="4" [ngClass]="{ 'error-border': newForm.get('details_en').hasError('required') && (newForm.get('details_en').touched) }"></textarea>
+                  </div>
+                  <div *ngIf="newForm.get('details_en').hasError('required') && (newForm.get('details_en').touched)"
+                    class="text-danger"> <i class="ft-alert-circle align-middle"></i>
+                    {{'DETAILS_EN'|translate}} {{'IS_REQUIRED'|translate}}
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="form-group">
+                  <label for="details_fa">{{'DETAILS_FA'|translate}}<span
+                      class="required-field">*</span></label>
+                  <div class="controls">
+                    <textarea class="form-control" style="width: 100%;" formControlName="details_fa"  rows="4" [ngClass]="{ 'error-border': newForm.get('details_fa').hasError('required') && (newForm.get('details_fa').touched) }"></textarea>
+                  </div>
+                  <div *ngIf="newForm.get('details_fa').hasError('required') && (newForm.get('details_fa').touched)"
+                    class="text-danger"> <i class="ft-alert-circle align-middle"></i>
+                    {{'DETAILS_FA'|translate}} {{'IS_REQUIRED'|translate}}
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="form-group">
+                  <label for="details_ps">{{'DETAILS_PS'|translate}}<span
+                      class="required-field">*</span></label>
+                  <div class="controls">
+                    <textarea class="form-control" style="width: 100%;" formControlName="details_ps"  rows="4" [ngClass]="{ 'error-border': newForm.get('details_ps').hasError('required') && (newForm.get('details_ps').touched) }"></textarea>
+                  </div>
+                  <div *ngIf="newForm.get('details_ps').hasError('required') && (newForm.get('details_ps').touched)"
+                    class="text-danger"> <i class="ft-alert-circle align-middle"></i>
+                    {{'DETAILS_PS'|translate}} {{'IS_REQUIRED'|translate}}
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="form-group">
+                  <label for="type">{{'TYPE'|translate}}
+                    <span class="required-field">*</span>
+                  </label>
+                  <div class="controls">
+                    <ng-select [items]="types" [placeholder]="'TYPE'|translate"
+                      clearAllText="Clear" formControlName="type">
+                    </ng-select>
+                  </div>
+                  <div *ngIf="newForm.get('type').hasError('required') && (newForm.get('type').touched)"
+                    class="text-danger"> <i class="ft-alert-circle align-middle"></i>
+                    {{'TYPE'|translate}} {{'IS_REQUIRED'|translate}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary btn-fill mr-2" (click)="onFormSubmit()">{{'SUBMIT' | translate }}</button>
+          <button class="btn btn-secondary btn-fill" (click)="closeModal()" type="button">{{ 'CANCEL' | translate
+            }}</button>
+        </div>
+    </div>
+  
